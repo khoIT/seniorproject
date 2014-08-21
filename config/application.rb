@@ -22,7 +22,6 @@ module Rideshare
     config.i18n.enforce_available_locales = false
     config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
     # Enable the asset pipeline
-    config.assets.enabled = true
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
     config.generators do |g|
       g.test_framework :rspec
