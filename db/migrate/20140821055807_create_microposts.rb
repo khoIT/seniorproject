@@ -3,8 +3,9 @@ class CreateMicroposts < ActiveRecord::Migration
     create_table :microposts do |t|
       t.string :start
       t.string :destination
-      t.date :time
-      t.integer :passengers_number
+      t.datetime :time
+      t.integer :seats_left
+      t.integer :own_ride_id
       t.timestamps
     end
   end

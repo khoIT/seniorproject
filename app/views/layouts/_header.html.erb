@@ -39,10 +39,16 @@
   <body>
   <ul class="nav nav-tabs col-md-offset-1" role="tablist">
     <li>
-    <a> <span class="glyphicon glyphicon-home"></span></a>
+    <a href="/welcome"> <span class="glyphicon glyphicon-home"></span></a>
     </li>
     <li>
       <a href="#">Post a Drive</a>
+    </li>
+    <li>
+      <%= link_to "My Drive", user_path(id: @user.id) %>
+    </li>
+    <li>
+      <%= link_to "Sort by Location", by_start_path %>
     </li>
     <li>
       <% if user_signed_in? %>
@@ -54,28 +60,3 @@
         <%= link_to "Login", new_user_session_path, class: "login_button" %>
       <% end %>
   </ul>
-  <% @user.rides.each do |r| %>
-      <div class="panel panel-success col-md-4">
-        <div class="panel-heading"><%= r.id %></div>
-        <div class="panel-body">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th> From </th>
-                <th> Destination </th>
-                <th> Date </th>
-                <th> People </th>
-              </thead>
-              <tbody>
-                <td><%= r.start %></td>
-                <td><%= r.destination %></td>
-                <td><%= r.time %></td>
-                <td><%= r.passengers_number %></td>
-              </tbody>
-           </div>
-         </div>
-    </thead>
-  <% end %>
-
-  </body>
-</html>

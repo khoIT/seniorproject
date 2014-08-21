@@ -4,7 +4,9 @@ Rideshare::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'user#index'
+  root 'welcome#index'
+  get 'welcome', to: 'welcome#index'
+  get 'by_start', to: 'welcome#by_start', as: :by_start
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -16,13 +18,13 @@ Rideshare::Application.routes.draw do
   #   resources :products
 
   # Example resource route with options:
+  get 'user/:id' => 'user#index', as: :user
   resources :microposts
   resource :users do
       member do
          get :rides
       end
   end
-  get 'users/:id' => 'users#show', as: :user
   #   resources :products do
   #     member do
   #       get 'short'

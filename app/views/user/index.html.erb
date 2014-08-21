@@ -1,0 +1,42 @@
+  <body>
+  <ul class="nav nav-tabs col-md-offset-1" role="tablist">
+    <li>
+    <a href="/welcome"> <span class="glyphicon glyphicon-home"></span></a>
+    </li>
+    <li>
+      <a href="#">Post a Drive</a>
+    </li>
+    <li>
+      <%= link_to "My Drive", user_path(id: @user.id) %>
+    </li>
+    <li>
+      <% if user_signed_in? %>
+        Logged in as <strong><%= current_user.email %></strong>.
+        <%= link_to 'Edit profile', edit_user_registration_path, class: "login_button"  %> |
+        <%= link_to "Logout", destroy_user_session_path, class: "login_button", method: :delete %>
+      <% else %>
+        <%= link_to "Sign up", new_user_registration_path, class: "login_button" %> |
+        <%= link_to "Login", new_user_session_path, class: "login_button" %>
+      <% end %>
+  </ul>
+  <% @user.created_rides.each do |r| %>
+      <div class="panel panel-success col-md-3">
+        <div class="panel-heading"><%= r.start %> to <%= r.destination %></div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <th> Date </th>
+              <th> Seats left </th>
+            </thead>
+            <tbody>
+              <td><%= r.time %></td>
+              <td><%= r.seats_left %></td>
+            </tbody>
+          </table>
+         </div>
+         </div>
+       </div>
+  <% end %>
+
+  </body>
+
