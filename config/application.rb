@@ -20,6 +20,13 @@ module Rideshare
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = false
-    config.assets.paths << "#{Rails}/vendor/assets/fonts"
+    config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
+    # Enable the asset pipeline
+    config.assets.enabled = true
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    config.generators do |g|
+      g.test_framework :rspec
+    end
+     end
   end
 end
