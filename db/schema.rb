@@ -11,30 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140821093030) do
+ActiveRecord::Schema.define(version: 20140821065210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "microposts", force: true do |t|
+  create_table "passenger_rides", force: true do |t|
+    t.integer  "ride_id"
+    t.integer  "passenger_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rides", force: true do |t|
     t.string   "start"
     t.string   "destination"
     t.datetime "time"
     t.integer  "seats_left"
-    t.integer  "own_ride_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "own_rides", force: true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "passenger_rides", force: true do |t|
-    t.integer  "ride_id"
-    t.integer  "passenger_id"
+    t.integer  "driver_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

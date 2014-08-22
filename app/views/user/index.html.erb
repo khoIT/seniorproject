@@ -1,5 +1,5 @@
 <%= render partial: "layouts/header" %>
-  <% @user.created_rides.each do |r| %>
+  <% @user.fares.each do |r| %>
       <div class="panel panel-success col-md-3">
         <div class="panel-heading"><%= r.start %> to <%= r.destination %></div>
         <div class="panel-body">

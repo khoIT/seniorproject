@@ -1,24 +1,19 @@
-<%= render partial: "layouts/header" %>
-<% @rides_start.each do |start, ride| %>
-  <div class="col-md-12">
-    <h4><%= start %></h4>
-    <% for r in ride %>
-      <div class="panel panel-success col-md-3">
-        <div class="panel-heading"><%= r.start %> to <%= r.destination %></div>
-        <div class="panel-body">
-          <table class="table">
-            <thead>
-              <th> Date </th>
-              <th> Seats left </th>
-            </thead>
-            <tbody>
-              <td><%= r.time.strftime("%b-%d %H:%M") %></td>
-              <td><%= r.seats_left %></td>
-            </tbody>
-          </table>
-        </div> <!--end panel-body !-->
-      </div> <!-- end panel !-->
-    <% end %>
-    </div> <!-- end col-md-12 !-->
-<% end %>
-
+<html>
+  <head><title></title></head>
+  <%= render partial: "layouts/header" %>
+  <script src="/underscore-min.js"></script>
+  <script src="/jquery-1.11.1.min.js"></script>
+  <script>
+    $(function(){
+    $.get("/by_start.html.template")
+    .done(function(text){template = _.template(text)})
+    .then(
+    function(){ $.get("/by_start_json")
+    .done(function(text){data = text})
+    .then(function(){
+      $("#content").html(template(data))})})
+    });
+  </script>
+  <div id="content">
+  </div>
+</html>

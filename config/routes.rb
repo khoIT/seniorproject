@@ -7,6 +7,7 @@ Rideshare::Application.routes.draw do
   root 'welcome#index'
   get 'welcome', to: 'welcome#index'
   get 'by_start', to: 'welcome#by_start', as: :by_start
+  get 'by_start_json', to: 'welcome#by_start_json'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

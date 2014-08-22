@@ -1,0 +1,20 @@
+<% @rides_start.each do |r| %>
+    <div class="panel panel-success col-md-3">
+      <div class="panel-heading"><%= r.start %> to <%= r.destination %></div>
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <th> Date </th>
+            <th> Seats left </th>
+          </thead>
+          <tbody>
+            <td><%= r.time.strftime("%b-%d %H:%M") %></td>
+            <td><%= r.seats_left %></td>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- end panel !-->
+<% end %>
+
+
+
