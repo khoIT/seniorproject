@@ -1,0 +1,25 @@
+<% rides = _.flatten(_.map(data.rides_start, function(v, k){return v})); %>
+<% _.each(rides_start, function(ride, start) {  %>
+  <div class="col-md-12">
+    <% console.log(start) %>
+    <h4><%= start %></h4>
+    <% for(r in ride) { %>
+      <div class="panel panel-success col-md-3">
+        <div class="panel-heading"><%= ride[r].start %> to <%= ride[r].destination %></div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <th> Date </th>
+              <th> Seats left </th>
+            </thead>
+            <tbody>
+              <td><%= ride[r].time %></td>
+              <td><%= ride[r].seats_left %></td>
+            </tbody>
+          </table>
+        </div> <!--end panel-body !-->
+      </div> <!-- end panel !-->
+    <% } %>
+    </div> <!-- end col-md-12 !-->
+<% }) %>
+

@@ -1,0 +1,14 @@
+<html>
+  <head><title></title></head>
+  <script src="/underscore-min.js"></script>
+  <script src="/jquery-1.11.1.min.js"></script>
+  <script>
+    $(function(){
+      $.get("/by_start.html.template").success(function(text){template = _.template(text)})
+      $.get("/by_start_json").success(function(text){data = text})
+      $("body").html();
+    });
+  </script>
+  <body>
+  </body>
+</html>
