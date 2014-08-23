@@ -6,6 +6,15 @@ RSpec.describe User, :type => :model do
     @ride1 = FactoryGirl.create(:ride)
     @ride2 = FactoryGirl.create(:ride)
     @ride3 = FactoryGirl.create(:ride)
+    @ride4 = FactoryGirl.create(:ride)
+    @user.hop_in!(@ride1)
+    @ride1.passenger_rides.find_by_passenger_id(@user.id).update_attributes(confirmed: "true")
+    @ride1.seats_left -= 1
+    @user.hop_in!(@ride2)
+    @ride2.passenger_rides.find_by_passenger_id(@user.id).update_attributes(confirmed: "true")
+    @ride2.seats_left -= 1
+    @user.hop_in!(@ride2)
+    @user.fares << @ride3
   end
 
   it 'must have a name' do
@@ -15,25 +24,22 @@ RSpec.describe User, :type => :model do
     expect(@user.attributes).to include("email")
   end
 
-  it 'should have a fare' do
-    @user.fares << [@ride1, @ride2]
-    expect(@user.fares.count).to eq(2)
+  it 'should have a driver' do
+    expect(@user.driver?(@ride3)).to be true
   end
 
   it 'should know if user is in rides' do
-    @user.rides << @ride1
-    @user.fares << @ride2
     expect(@user.passenger?(@ride1)).to be true
-    expect(@user.driver?(@ride2)).to be true
   end
 
   it 'should be able to hop in rides' do
-    @user.hop_in!(@ride1)
-    expect(@ride1.seats_left).to eq(4)
+    @user.hop_in!(@ride4)
+    expect(@ride4.passengers).to include(@user)
+  end
+
+  it 'should be able to jump off rides' do
     @user.jump_off!(@ride1)
+    expect(@ride1.seats_left).to eq(3)
     expect(@user.passenger?(@ride1)).to be false
-    @user.hop_in!(@ride1)
-    expect(@user.passenger?(@ride1)).to be true
-    expect(@ride1.seats_left).to eq(4)
   end
 end

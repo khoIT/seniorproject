@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   has_many :fares, foreign_key: "driver_id", class_name: "Ride", inverse_of: :user
 
   def passenger?(ride)
-      !self.rides.find_by_id(ride.id).nil?
+    passenger_ride = self.passenger_rides.find_by_ride_id(ride.id)
+    passenger_ride ? passenger_ride.confirmed == true : false
   end
 
   def driver?(ride)
@@ -29,6 +30,6 @@ class User < ActiveRecord::Base
 
   def pending?(ride)
      ride = self.passenger_rides.find_by_ride_id(ride.id)
-     ride ? ride.confirm == true : false
+     ride ? ride.confirmed == false : false
   end
 end

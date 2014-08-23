@@ -17,7 +17,8 @@ r5 = Ride.create(start: 'DePauw', destination: 'Boston', time: Time.new(2014, 10
 r6 = Ride.create(start: 'DePauw', destination: 'Walmart', time: Time.new(2014, 11, 9, 22, 35, 0), seats_left: 6)
 r7 = Ride.create(start: 'Walmart', destination: 'DePauw', time: Time.new(2014, 10, 13, 22, 35, 0), seats_left: 5)
 r8 = Ride.create(start: '407 S.Jackson', destination: 'Prindle Institute', time: Time.new(2014, 10, 13, 22, 35, 0), seats_left: 4)
-r1.passengers = [u2,u3]
-r2.passengers = [u3,u4]
-r4.passengers = [u2,u3,u4]
 u1.fares << [r1,r2]
+r1.passengers << u2
+r1.passenger_rides.find_by_passenger_id(u2.id).update_attributes!(confirmed: "true")
+r2.passengers << u3
+r2.passenger_rides.find_by_passenger_id(u3.id).update_attributes!(confirmed: "true")

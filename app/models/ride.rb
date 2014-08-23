@@ -13,5 +13,10 @@ class Ride < ActiveRecord::Base
      end
      User.find(ids)
    end
+
+   def accept(user)
+     self.passenger_rides.find_by_passenger_id(user.id).update_attributes(confirmed: "true")
+     self.seats_left -= 1
+   end
 end
 

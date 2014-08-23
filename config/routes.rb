@@ -8,6 +8,7 @@ Rideshare::Application.routes.draw do
   get 'by_start', to: 'welcome#by_start', as: :by_start
   get 'by_start_json', to: 'welcome#by_start_json'
   post 'hop_on', to: 'user#hop_on'
+  post 'accept', to: 'user#accept'
   post 'jump_off', to: 'user#jump_off'
 
   # Example of regular route:

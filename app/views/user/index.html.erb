@@ -1,6 +1,6 @@
 <%= render partial: "layouts/header" %>
   <div class="container-fluid">
-  <% @user.fares.each do |r| %>
+  <% current_user.fares.each do |r| %>
   <div class="col-md-4">
       <div class="panel panel-success">
         <div class="panel-heading"><%= r.start %> to <%= r.destination %></div>
@@ -20,7 +20,7 @@
               <% r.pending_passengers.each do |p| %>
               <tr>
                 <td><%= p.name %></td>
-                <td>Accept</td>
+                <td><%= button_to "Accept", {controller: "user", action: "accept", ride: r, passenger: p} %></td>
                 <td>Reject</td>
               </tr>
               <% end %>

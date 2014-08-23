@@ -22,13 +22,16 @@
               <li class="col-md-3">
               <%= button_to "Jump off", {controller:'user', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
               </li>
-            <% elsif !@user.driver?(r) && !@user.pending?(r) %>
-              <li class="col-md-3">
-              <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
-              </li>
             <% elsif @user.pending?(r) %>
               <li class="col-md-3">
-              <%= button_to "Pending", {}, {class: 'btn btn-danger'} %>
+              <button class="btn btn-warning">Pending</button>
+              </li>
+              <li class="col-md-3">
+              <%= button_to "Jump off", {controller:'user', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+              </li>
+            <% elsif !@user.driver?(r) %>
+              <li class="col-md-3">
+              <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
               </li>
             <% end %>
           <% else %>
