@@ -6,8 +6,7 @@ class WelcomeController < ApplicationController
 
   def by_start
     @user = current_user
-    @all_rides = Ride.all
-    @rides_start = @all_rides.group_by {|r| r.start}
+    @rides_start = Ride.all.group_by {|r| r.start}
   end
 
   def by_start_json
@@ -16,4 +15,5 @@ class WelcomeController < ApplicationController
     rides_start: Ride.all.group_by {|r| r.start},
     }
   end
+
 end

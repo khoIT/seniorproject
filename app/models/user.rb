@@ -8,15 +8,19 @@ class User < ActiveRecord::Base
 
   has_many :fares, foreign_key: "driver_id", class_name: "Ride", inverse_of: :user
 
-  def hopped_in?(ride)
-      self.passenger_rides.find_by_ride_id(ride.id)
+  def passenger?(ride)
+      !self.rides.find_by_id(ride.id).nil?
+  end
+
+  def driver?(ride)
+      ride.driver_id == self.id
   end
 
   def hop_in!(ride)
-     self.passenger_rides.create!(ride_id: ride.id)
+     self.rides << ride
   end
 
   def jump_off!(ride)
-   self.passenger_rides.find_by_ride_id(ride.id).destroy
+     self.rides.delete(ride)
   end
 end
