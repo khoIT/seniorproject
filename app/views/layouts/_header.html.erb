@@ -44,9 +44,11 @@
     <li>
       <a href="#">Post a Drive</a>
     </li>
+    <% if @user %>
     <li>
       <%= link_to "My Drive", user_path(id: @user.id) %>
     </li>
+    <% end %>
     <li>
       <%= link_to "Sort by Location", by_start_path %>
     </li>

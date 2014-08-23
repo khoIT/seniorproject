@@ -28,10 +28,12 @@ RSpec.describe User, :type => :model do
   end
 
   it 'should be able to hop in rides' do
-    @user.rides << @ride1
+    @user.hop_in!(@ride1)
+    expect(@ride1.seats_left).to eq(4)
     @user.jump_off!(@ride1)
     expect(@user.passenger?(@ride1)).to be false
     @user.hop_in!(@ride1)
     expect(@user.passenger?(@ride1)).to be true
+    expect(@ride1.seats_left).to eq(4)
   end
 end

@@ -20,4 +20,4 @@ r8 = Ride.create(start: '407 S.Jackson', destination: 'Prindle Institute', time:
 r1.passengers = [u2,u3]
 r2.passengers = [u3,u4]
 r3.passengers = [u2,u3,u4]
-u1.fares << [r1,r2,r3,r4]
+u1.fares << [r1,r2]

@@ -17,10 +17,14 @@ class User < ActiveRecord::Base
   end
 
   def hop_in!(ride)
+     ride.seats_left -= 1
+     ride.save!
      self.rides << ride
   end
 
   def jump_off!(ride)
+     ride.seats_left += 1
+     ride.save!
      self.rides.delete(ride)
   end
 end
