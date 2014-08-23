@@ -49,5 +49,12 @@ end
 # gem 'capistrano', group: :development
 
 # Use debugger
-gem 'debugger', group: [:development, :test]
 gem 'devise'
+group :development, :test do
+    gem 'rspec-rails', '~> 3.0.0'
+    gem 'debugger'
+end
+
+#Simple cov for coverage testing
+gem 'simplecov', :require => false, :group => :test
+gem "factory_girl_rails", "~> 4.0"
