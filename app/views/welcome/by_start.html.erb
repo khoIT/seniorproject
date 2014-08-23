@@ -1,10 +1,27 @@
 <%= render partial: "layouts/header" %>
-<% @rides_start.each do |title, ride| %>
+<% @rides_start.each do |title, rides| %>
   <div class="col-md-12">
     <h4>From: <%= title %></h4>
-    <% for r in ride do %>
+    <% rides.each do |r| %>
+      <% if !@user.passenger?(r) && !@user.driver?(r) %>
       <div class="panel panel-success col-md-3">
-        <div class="panel-heading"><%= r.start %> to <%= r.destination %></div>
+      <% else %>
+      <div class="panel panel-info col-md-3">
+      <% end %>
+        <div class="panel-heading col-md-12 nav nav-tabs">
+          <li>
+            <h4><%= r.start %> to <%= r.destination %></h4>
+          </li>
+          <% if @user.passenger?(r) %>
+            <li class="col-md-3">
+            <%= button_to "Jump off", {controller:'user', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+            </li>
+          <% elsif !@user.driver?(r) %>
+            <li class="col-md-3">
+            <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+            </li>
+          <% end %>
+        </div>
         <div class="panel-body">
           <table class="table">
             <thead>

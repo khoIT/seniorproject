@@ -7,6 +7,8 @@ Rideshare::Application.routes.draw do
   root 'welcome#by_start'
   get 'by_start', to: 'welcome#by_start', as: :by_start
   get 'by_start_json', to: 'welcome#by_start_json'
+  post 'hop_on', to: 'user#hop_on'
+  post 'jump_off', to: 'user#jump_off'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -19,12 +21,6 @@ Rideshare::Application.routes.draw do
 
   # Example resource route with options:
   get 'user/:id' => 'user#index', as: :user
-  resources :microposts
-  resource :users do
-      member do
-         get :rides
-      end
-  end
   #   resources :products do
   #     member do
   #       get 'short'
