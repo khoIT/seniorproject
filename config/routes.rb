@@ -4,8 +4,7 @@ Rideshare::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
-  get 'welcome', to: 'welcome#index'
+  root 'welcome#by_start'
   get 'by_start', to: 'welcome#by_start', as: :by_start
   get 'by_start_json', to: 'welcome#by_start_json'
 
