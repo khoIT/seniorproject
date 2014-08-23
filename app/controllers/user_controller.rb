@@ -4,6 +4,7 @@ class UserController < ApplicationController
   def index
     @user = current_user
   end
+
   def hop_on
     @user = current_user
     @ride = Ride.find_by_id(params[:ride])

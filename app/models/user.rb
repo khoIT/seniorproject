@@ -17,14 +17,18 @@ class User < ActiveRecord::Base
   end
 
   def hop_in!(ride)
-     ride.seats_left -= 1
-     ride.save!
      self.rides << ride
+     self.passenger_rides.find_by_ride_id(ride.id).update_attributes(confirmed: "false")
   end
 
   def jump_off!(ride)
      ride.seats_left += 1
      ride.save!
      self.rides.delete(ride)
+  end
+
+  def pending?(ride)
+     ride = self.passenger_rides.find_by_ride_id(ride.id)
+     ride ? ride.confirm == true : false
   end
 end

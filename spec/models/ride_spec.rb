@@ -13,4 +13,9 @@ RSpec.describe Ride, :type => :model do
     @ride.passengers << [@passenger1, @passenger2, @passenger3]
     expect(@ride.passengers.count).to eq(3)
   end
+
+  it 'should have pending passengers' do
+    @ride.passengers << [@passenger1, @passenger2, @passenger3]
+    expect(@ride.passengers.count).to eq(3)
+  end
 end

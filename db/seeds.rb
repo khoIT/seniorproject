@@ -19,5 +19,5 @@ r7 = Ride.create(start: 'Walmart', destination: 'DePauw', time: Time.new(2014, 1
 r8 = Ride.create(start: '407 S.Jackson', destination: 'Prindle Institute', time: Time.new(2014, 10, 13, 22, 35, 0), seats_left: 4)
 r1.passengers = [u2,u3]
 r2.passengers = [u3,u4]
-r3.passengers = [u2,u3,u4]
+r4.passengers = [u2,u3,u4]
 u1.fares << [r1,r2]
