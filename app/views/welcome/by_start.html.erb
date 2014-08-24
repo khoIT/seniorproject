@@ -34,7 +34,7 @@
               <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
               </li>
             <% end %>
-          <% else %>
+          <% elsif r.seats_left != 1 %>
               <li class="col-md-3">
               <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
               </li>
