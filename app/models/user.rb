@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   def hop_in!(ride)
      self.rides << ride
-     self.passenger_rides.find_by_ride_id(ride.id).update_attributes(confirmed: "false")
+     self.passenger_rides.find_by_ride_id(ride.id).update_attributes!(confirmed: "false")
   end
 
   def jump_off!(ride)
