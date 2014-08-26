@@ -1,0 +1,23 @@
+<%= render partial: "layouts/header" %>
+<div class="border-form-div col-md-4">
+  <h2>Offer a Ride</h2>
+
+  <%= form_for(:ride, url: create_ride_path) do |f| %>
+
+  <div><%= f.label :start_location %><br />
+  <%= f.email_field :start, autofocus: true %></div>
+
+  <div><%= f.label :destination %><br />
+    <%= f.password_field :destination, autocomplete: "off" %></div>
+
+  <div><%= f.label :departure_time %><br />
+    <%= f.password_field :departure_time, autocomplete: "off" %></div>
+
+  <div><%= f.label :seats_available %><br />
+    <%= f.password_field :seats_available, autocomplete: "off" %></div>
+
+  <div><%= f.submit "Sign up", {class: "btn btn-success"} %></div>
+<% end %>
+
+</div>
+

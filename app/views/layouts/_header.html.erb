@@ -34,24 +34,16 @@
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
 
-    <%= javascript_include_tag "application" %>
   </head>
   <body>
   <ul class="nav nav-tabs col-md-offset-1" role="tablist">
+    <li> <a href="/"> <span class="glyphicon glyphicon-home"></span></a> </li>
+    <li> <a href="/new_ride"> <span class="glyphicon glyphicon-plus"></span></a> </li>
+    <% if current_user %>
     <li>
-    <a href="/"> <span class="glyphicon glyphicon-home"></span></a>
-    </li>
-    <li>
-      <a href="#">Post a Drive</a>
-    </li>
-    <% if @user %>
-    <li>
-      <%= link_to "My Drive", user_path(id: @user.id) %>
+      <%= link_to "My Drive", user_path(id: current_user.id) %>
     </li>
     <% end %>
-    <li>
-      <%= link_to "Sort by Location", by_start_path %>
-    </li>
     <li>
       <% if user_signed_in? %>
         Logged in as <strong><%= current_user.email %></strong>.

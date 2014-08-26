@@ -4,12 +4,14 @@ Rideshare::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#by_start'
+  root 'welcome#index'
   get 'by_start', to: 'welcome#by_start', as: :by_start
   get 'by_start_json', to: 'welcome#by_start_json'
   post 'hop_on', to: 'user#hop_on'
   post 'accept', to: 'user#accept'
   post 'jump_off', to: 'user#jump_off'
+  get 'new_ride', to: 'ride#new', as: :new_ride
+  post 'create_ride', to: 'ride#create', as: :create_ride
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

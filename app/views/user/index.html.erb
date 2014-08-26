@@ -8,20 +8,32 @@
           <table class="table">
             <thead>
               <th>Date</th>
-              <th>Seats left</th>
+              <th>Seats</th>
             </thead>
             <tbody>
-              <td><%= r.time %></td>
-              <td><%= r.seats_left %></td>
+              <tr>
+                <td><%= r.time %></td>
+                <td><%= r.seats_left %></td>
+              </tr>
             </tbody>
           </table>
           <table class="table">
+            <thead>
+              <th>User</th>
+            </thead>
             <tbody>
               <% r.pending_passengers.each do |p| %>
               <tr>
                 <td><%= p.name %></td>
                 <td><%= button_to "Accept", {controller: "user", action: "accept", ride: r, passenger: p} %></td>
-                <td>Reject</td>
+                <td><a><span class="glyphicon glyphicon-minus"></a></td>
+              </tr>
+              <% end %>
+              <% r.passengers.each do |p| %>
+              <tr>
+                <td><%= p.name %></td>
+                <td><a><span class="glyphicon glyphicon-plus"></a></td>
+                <td><a><span class="glyphicon glyphicon-minus"></a></td>
               </tr>
               <% end %>
             </tbody>

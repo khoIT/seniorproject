@@ -9,6 +9,10 @@ group :production, :staging do
       gem 'pg'
       gem 'rails_12factor'
 end
+group :development, :test do
+    gem 'rspec-rails', '~> 3.0.0'
+    gem 'debugger'
+end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -50,11 +54,8 @@ end
 
 # Use debugger
 gem 'devise'
-group :development, :test do
-    gem 'rspec-rails', '~> 3.0.0'
-    gem 'debugger'
-end
 
 #Simple cov for coverage testing
 gem 'simplecov', :require => false, :group => :test
 gem "factory_girl_rails", "~> 4.0"
+gem 'jquery-datatables-rails', '~> 2.2.1'

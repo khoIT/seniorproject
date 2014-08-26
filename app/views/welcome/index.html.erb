@@ -1,19 +1,56 @@
 <%= render partial: "layouts/header" %>
-<% @all_rides.each do |r| %>
-    <div class="panel panel-success col-md-3">
-      <div class="panel-heading"><%= r.start %> to <%= r.destination %></div>
-      <div class="panel-body">
-        <table class="table">
-          <thead>
-            <th> Date </th>
-            <th> Seats left </th>
-          </thead>
-          <tbody>
-            <td><%= r.time.strftime("%b-%d %H:%M") %></td>
-            <td><%= r.seats_left %></td>
-          </tbody>
-        </table>
-      </div>
-    </div><!-- end panel !-->
-<% end %>
+
+  <!-- Table -->
+  <div class="container">
+    <table id="rides" class="table">
+    <thead>
+      <th>#</th>
+      <th>Driver</th>
+      <th>From</th>
+      <th>Destination</th>
+      <th>Departure</th>
+      <th>Seats</th>
+      <th>Status</th>
+    </thead>
+    <tbody>
+    <% @all_rides.each do |r| %>
+      <tr>
+      <td class="col-md-1"><%= r.id %></td>
+      <td class="col-md-1"><%= User.find_by_id(r.driver_id)? User.find_by_id(r.driver_id).name : ""%></td>
+      <td class="col-md-2"><%= r.start %></td>
+      <td class="col-md-2"><%= r.destination %></td>
+      <td class="col-md-2"><%= r.time.strftime("%b-%d %H:%M") %></td>
+      <td class="col-md-1"><%= r.seats_left %></td>
+      <td>
+          <% if current_user then %>
+            <% if current_user.passenger?(r) %>
+              <%= button_to "Jump off", {controller:'user', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+            <% elsif current_user.pending?(r) %>
+              <label style="display:inline-block" class="btn btn-warning">Pending</label>
+              <div style="display:inline-block">
+                <%= button_to "Jump off", {controller:'user', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+              </div>
+            <% elsif !current_user.driver?(r) %>
+              <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+            <% end %>
+            <!--//view as guest!-->
+          <% elsif r.seats_left != 0 %>
+              <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+          <% end %>
+
+      </td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<script>
+  $(document).ready(function() {
+    $('#rides').dataTable({
+      "paging": false,
+      "scrollY":        "800px",
+      "scrollCollapse": true,
+    });
+  } );
+</script>
 

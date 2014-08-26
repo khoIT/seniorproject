@@ -1,0 +1,59 @@
+<%= render partial: "layouts/header" %>
+  <div class="container-fluid">
+  <% @rides_start.each do |title, rides| %>
+  <div class="col-md-4">
+    <h4><%= title %></h4>
+    <% rides.each do |r| %>
+      <% if !@user.nil? then %>
+        <% if !@user.passenger?(r) && !@user.driver?(r) %>
+        <div class="panel panel-success">
+        <% else %>
+        <div class="panel panel-info">
+        <% end %>
+      <% else %>
+        <div class="panel panel-success">
+      <% end %>
+        <div class="panel-heading col-md-12 nav nav-tabs">
+          <li>
+            <h4><%= r.start %> to <%= r.destination %></h4>
+          </li>
+          <% if !@user.nil? then %>
+            <% if @user.passenger?(r) %>
+              <li class="col-md-3">
+              <%= button_to "Jump off", {controller:'user', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+              </li>
+            <% elsif @user.pending?(r) %>
+              <li class="col-md-3">
+              <button class="btn btn-warning">Pending</button>
+              </li>
+              <li class="col-md-3">
+              <%= button_to "Jump off", {controller:'user', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+              </li>
+            <% elsif !@user.driver?(r) %>
+              <li class="col-md-3">
+              <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+              </li>
+            <% end %>
+          <% elsif r.seats_left != 1 %>
+              <li class="col-md-3">
+              <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+              </li>
+          <% end %>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <th> Date </th>
+              <th> Seats left </th>
+            </thead>
+            <tbody>
+              <td><%= r.time.strftime("%b-%d %H:%M") %></td>
+              <td><%= r.seats_left %></td>
+            </tbody>
+          </table>
+        </div>
+      </div><!-- end panel !-->
+    <% end %>
+  </div>
+  <% end %>
+  </div>

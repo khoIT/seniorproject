@@ -1,11 +1,11 @@
 class WelcomeController < ApplicationController
   def index
-    @user = current_user
-    @all_rides = Ride.all
+    @all_rides = Ride.all#[order_by: 'id']
   end
 
   def by_start
     @user = current_user
+    @all_rides = Ride.all
     @rides_start = Ride.all.where.not(seats_left: 0).group_by {|r| r.start}
   end
 
