@@ -4,10 +4,11 @@ class RidesController < ApplicationController
   end
 
   def create
-    ride = Ride.create(start: params[:start_location],
-                       destination: params[:start_location],
-                       time: params[:start_location],
-                       seats_left: params[:start_location])
+    ride = Ride.create(start: params[:ride][:ride_start],
+                       destination: params[:ride][:destination],
+                       time: params[:ride][:departure_time],
+                       seats_left: params[:ride][:seats],
+                       driver_id: current_user.id)
     redirect_to user_path(current_user)
   end
   def list_start

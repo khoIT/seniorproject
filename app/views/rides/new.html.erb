@@ -13,10 +13,10 @@
  </div>
   <div class="col-xs-9 col-sm-6">
     <div><%= f.label :departure_time %>
-      <%= f.password_field :departure_time, autocomplete: "off" %></div><br />
+      <%= f.text_field :departure_time %></div><br />
 
     <div><%= f.label :seats_available %>
-      <%= f.password_field :seats_available, autocomplete: "off" %></div><br />
+      <%= f.text_field :seats %></div><br />
  </div>
 
   <div class="col-xs-9 col-sm-6 col-xs-offset-9 col-sm-offset-6"><%= f.submit "Sign up", {class: "btn btn-success"} %></div>
