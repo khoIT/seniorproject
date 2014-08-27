@@ -1,0 +1,31 @@
+<%= render partial: "layouts/header" %>
+<div class="border-form-div col-xs-6 col-sm-4 col-sm-offset-4">
+  <h2>Request a Ride</h2>
+  <%= form_for :ride, url:{action: "create"} do |f| %>
+
+  <div><%= f.label :ride_start %>
+  <%= f.text_field :ride_start, id: "autocomplete", data: {autocomplete_source:
+                                       Ride.list_start }%></div><br />
+
+  <div><%= f.label :destination %>
+    <%= f.email_field :destination, autocomplete: "off" %></div><br />
+
+  <div><%= f.label :departure_time %>
+    <%= f.password_field :departure_time, autocomplete: "off" %></div><br />
+
+  <div><%= f.label :seats_available %>
+    <%= f.password_field :seats_available, autocomplete: "off" %></div><br />
+
+  <div><%= f.submit "Sign up", {class: "btn btn-success"} %></div>
+<% end %>
+</div>
+<!-- for now: not use simple form with autocomplete
+<div class="border-form-div col-md-4">
+  <h2>Request a Ride</h2>
+  <%= simple_form_for :ride do |f| %>
+    <%= f.input :list_start%>
+      <%= f.input :password %>
+      <%= f.button :submit, class:"btn btn-success" %>
+  <% end %>
+</div>
+!-->

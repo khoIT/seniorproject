@@ -7,11 +7,11 @@ Rideshare::Application.routes.draw do
   root 'welcome#index'
   get 'by_start', to: 'welcome#by_start', as: :by_start
   get 'by_start_json', to: 'welcome#by_start_json'
-  post 'hop_on', to: 'user#hop_on'
-  post 'accept', to: 'user#accept'
-  post 'jump_off', to: 'user#jump_off'
-  get 'new_ride', to: 'ride#new', as: :new_ride
-  post 'create_ride', to: 'ride#create', as: :create_ride
+  post 'hop_on', to: 'users#hop_on'
+  post 'accept', to: 'users#accept'
+  post 'jump_off', to: 'users#jump_off'
+  get 'rides/search_for_start', to: 'rides#search_for_start', as: :search_for_start
+  post 'create_ride', to: 'rides#create', as: :create_ride
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -23,7 +23,11 @@ Rideshare::Application.routes.draw do
   #   resources :products
 
   # Example resource route with options:
-  get 'user/:id' => 'user#index', as: :user
+  get 'user/:id' => 'users#index', as: :user
+  resource :rides do
+      get :autocomplete_ride_start, :on => :collection
+  end
+  resources :rides, defaults: { format: 'json' }
   #   resources :products do
   #     member do
   #       get 'short'

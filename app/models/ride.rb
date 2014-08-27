@@ -19,5 +19,18 @@ class Ride < ActiveRecord::Base
      self.seats_left -= 1
      self.save!
    end
+
+   def new
+     @ride = Ride.new
+   end
+
+   def self.list_start
+     Ride.all.map(&:start).uniq.sort
+   end
+
+   def self.list_destination
+     Ride.all.map(&:start).uniq.sort
+   end
+
 end
 

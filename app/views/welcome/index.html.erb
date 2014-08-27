@@ -15,27 +15,27 @@
     <tbody>
     <% @all_rides.each do |r| %>
       <tr>
-      <td class="col-md-1"><%= r.id %></td>
-      <td class="col-md-1"><%= User.find_by_id(r.driver_id)? User.find_by_id(r.driver_id).name : ""%></td>
-      <td class="col-md-2"><%= r.start %></td>
-      <td class="col-md-2"><%= r.destination %></td>
-      <td class="col-md-2"><%= r.time.strftime("%b-%d %H:%M") %></td>
-      <td class="col-md-1"><%= r.seats_left %></td>
+      <td class="col-xs-1 col-md-1"><%= r.id %></td>
+      <td class="col-xs-1 col-md-1"><%= User.find_by_id(r.driver_id)? User.find_by_id(r.driver_id).name : ""%></td>
+      <td class="col-xs-2 col-md-2"><%= r.start %></td>
+      <td class="col-xs-2 col-md-2"><%= r.destination %></td>
+      <td class="col-xs-2 col-md-2"><%= r.time.strftime("%b-%d %H:%M") %></td>
+      <td class="col-xs-1 col-md-1"><%= r.seats_left %></td>
       <td>
           <% if current_user then %>
             <% if current_user.passenger?(r) %>
-              <%= button_to "Jump off", {controller:'user', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+              <%= button_to "Jump off", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
             <% elsif current_user.pending?(r) %>
               <label style="display:inline-block" class="btn btn-warning">Pending</label>
               <div style="display:inline-block">
-                <%= button_to "Jump off", {controller:'user', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+                <%= button_to "Jump off", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
               </div>
             <% elsif !current_user.driver?(r) %>
-              <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+              <%= button_to "Hop on!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
             <% end %>
             <!--//view as guest!-->
           <% elsif r.seats_left != 0 %>
-              <%= button_to "Hop on!", {controller:'user', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+              <%= button_to "Hop on!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
           <% end %>
 
       </td>

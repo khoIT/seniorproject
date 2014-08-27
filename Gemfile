@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.5'
+gem 'rails', '~> 4.0.1'
 
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
@@ -59,3 +59,10 @@ gem 'devise'
 gem 'simplecov', :require => false, :group => :test
 gem "factory_girl_rails", "~> 4.0"
 gem 'jquery-datatables-rails', '~> 2.2.1'
+gem 'simple_form', '~> 3.0.0.rc'
+
+gem 'select2-rails'
+
+# later we will take advantage of this gem
+gem 'kaminari'
+gem 'jquery-ui-rails', '~> 5.0.0'
