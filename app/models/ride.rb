@@ -29,7 +29,7 @@ class Ride < ActiveRecord::Base
    end
 
    def self.list_destination
-     Ride.all.map(&:start).uniq.sort
+     Ride.all.map(&:destination).uniq.sort
    end
 
 end

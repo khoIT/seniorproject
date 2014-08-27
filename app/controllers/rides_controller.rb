@@ -10,5 +10,8 @@ class RidesController < ApplicationController
                        seats_left: params[:start_location])
     redirect_to user_path(current_user)
   end
-
+  def list_start
+    @start = Ride.all.order(:start).where("start like ?", "%#{params[:term]}%")
+    render json: @start
+  end
 end

@@ -10,7 +10,7 @@ Rideshare::Application.routes.draw do
   post 'hop_on', to: 'users#hop_on'
   post 'accept', to: 'users#accept'
   post 'jump_off', to: 'users#jump_off'
-  get 'rides/search_for_start', to: 'rides#search_for_start', as: :search_for_start
+  get 'rides/list_start', to: 'rides#list_start', as: :list_start
   post 'create_ride', to: 'rides#create', as: :create_ride
 
   # Example of regular route:
