@@ -26,15 +26,18 @@ class UsersController < ApplicationController
     if current_user.is_driver?
       current_user.update_attributes!(driver: false)
     else
-      debugger
       current_user.update_attributes!(driver: true)
     end
     redirect_to root_path
   end
 
   def drive
-    @ride = Ride.find_by_id(params[:ride])
-    current_user.drive!(@ride)
-    redirect_to root_path
+    if current_user.is_driver? then
+      @ride = Ride.find_by_id(params[:ride])
+      current_user.drive!(@ride)
+      redirect_to root_path
+    else
+      redirect_to root_path, notice: "You must be a driver to do this"
+    end
   end
 end
