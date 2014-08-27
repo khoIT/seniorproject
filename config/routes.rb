@@ -5,15 +5,17 @@ Rideshare::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
+  get 'switch_mode', to: 'users#switch_mode', as: :switch_mode
   get 'by_start', to: 'welcome#by_start', as: :by_start
   get 'by_start_json', to: 'welcome#by_start_json'
   post 'hop_on', to: 'users#hop_on'
   post 'accept', to: 'users#accept'
   post 'jump_off', to: 'users#jump_off'
-  get 'rides/list_start', to: 'rides#list_start', as: :new_ride
-  get 'rides/new', to: 'rides#new', as: :list_start
+  get 'rides/list_start', to: 'rides#list_start', as: :list_start
+  get 'rides/new', to: 'rides#new', as: :new_ride
   post 'create_ride', to: 'rides#create', as: :create_ride
-
+  post 'users/drive', to: 'users#drive', as: :driver
+  #
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

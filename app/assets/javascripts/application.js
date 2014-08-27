@@ -21,3 +21,4 @@
 //= require bootstrap
 //= require underscore-min
 //= require select2
+//= require bootstrap-switch

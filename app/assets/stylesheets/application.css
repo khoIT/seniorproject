@@ -15,6 +15,7 @@
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require user
  *= require select2
+ *= require bootstrap3-switch
 */
 ul.ui-autocomplete {
   position: absolute;

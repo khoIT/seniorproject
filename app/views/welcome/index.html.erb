@@ -31,13 +31,21 @@
                 <%= button_to "Jump off", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
               </div>
             <% elsif !current_user.driver?(r) %>
-              <%= button_to "Hop on!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+              <div style="display:inline-block">
+                <%= button_to "Hop on!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+              </div>
+              <% if current_user.is_driver? then %>
+                  <div style="display:inline-block">
+                    <%= button_to "Drive!", {controller:'users', action:'drive', ride: r.id}, {class: 'btn btn-primary'} %>
+                  </div>
+              <% end %>
             <% end %>
             <!--//view as guest!-->
           <% elsif r.seats_left != 0 %>
+              <div style="display:inline-block">
               <%= button_to "Hop on!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+              </div>
           <% end %>
-
       </td>
     </tr>
     <% end %>

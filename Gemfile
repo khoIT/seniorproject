@@ -66,3 +66,4 @@ gem 'select2-rails'
 # later we will take advantage of this gem
 gem 'kaminari'
 gem 'jquery-ui-rails', '~> 5.0.0'
+gem 'bootstrap-switch-rails', '~> 3.0.2'

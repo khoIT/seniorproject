@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
   has_many :fares, foreign_key: "driver_id", class_name: "Ride", inverse_of: :user
 
+  scope :driver, -> {where(driver: true)}
+
   def passenger?(ride)
     passenger_ride = self.passenger_rides.find_by_ride_id(ride.id)
     passenger_ride ? passenger_ride.confirmed == true : false
@@ -15,6 +17,11 @@ class User < ActiveRecord::Base
 
   def driver?(ride)
       ride.driver_id == self.id
+  end
+
+  def drive!(ride)
+    ride.update_attributes(driver_id: self.id)
+    self.fares << ride
   end
 
   def hop_in!(ride)
@@ -31,5 +38,9 @@ class User < ActiveRecord::Base
   def pending?(ride)
      ride = self.passenger_rides.find_by_ride_id(ride.id)
      ride ? ride.confirmed == false : false
+  end
+
+  def is_driver?
+    User.where(driver:true).exists?(self)
   end
 end
