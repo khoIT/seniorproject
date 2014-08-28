@@ -24,9 +24,6 @@
         Logged in as <strong><%= current_user.email %></strong>.
         <%= link_to 'Edit profile', edit_user_registration_path, class: "login_button"  %> |
         <%= link_to "Logout", destroy_user_session_path, class: "login_button", method: :delete %>
-        <li>
-        <input type="checkbox" name="driver" checked>
-        </li>
       <% else %>
         <%= link_to "Sign up", new_user_registration_path, class: "login_button" %> |
         <%= link_to "Login", new_user_session_path, class: "login_button" %>
@@ -34,20 +31,3 @@
   </ul>
 </body>
 </html>
-  <script>
-    window.switch = <%= session[:driver] %>
-    $('input[name="driver"]').bootstrapSwitch('state', window.switch, true);
-    $("[name='driver']").on('switchChange.bootstrapSwitch', function(event, state) {
-      console.log(this); // DOM element
-      console.log(event); // jQuery event
-      console.log(state); // true | false
-      $.ajax({
-        type: 'GET',
-        url: '/switch_mode',
-        data: {'driver': window.switch},
-        success: function(){
-          location.reload(); }
-      });
-      });
-
-  </script>

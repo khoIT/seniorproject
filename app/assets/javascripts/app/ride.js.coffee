@@ -2,8 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  $('#start').autocomplete
+  $('#start').autocomplete({
+      autoFocus: true,
       source: $('#start').data('autocomplete-source')
+  });
 
-  $('#destination').autocomplete
+jQuery ->
+  $('#destination').autocomplete({
+      autoFocus: true,
       source: $('#destination').data('autocomplete-source')
+  });

@@ -2,6 +2,7 @@
 
   <!-- Table -->
   <div class="container">
+    <input type="checkbox" name="driver" checked>
     <table id="rides" class="table">
     <thead>
       <th>#</th>
@@ -60,5 +61,20 @@
       "scrollCollapse": true,
     });
   } );
-</script>
+    window.switch = <%= session[:driver] %>
+    $('input[name="driver"]').bootstrapSwitch('state', window.switch, true);
+    $("[name='driver']").on('switchChange.bootstrapSwitch', function(event, state) {
+      console.log(this); // DOM element
+      console.log(event); // jQuery event
+      console.log(state); // true | false
+      $.ajax({
+        type: 'GET',
+        url: '/switch_mode',
+        data: {'driver': window.switch},
+        success: function(){
+          location.reload(); }
+      });
+      });
+
+  </script>
 
