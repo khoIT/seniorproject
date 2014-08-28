@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//r= require_tree ./app
+//= require_tree ./app
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require twitter/bootstrap
@@ -22,3 +22,5 @@
 //= require underscore-min
 //= require select2
 //= require bootstrap-switch
+//= require moment
+//= require bootstrap-datetimepicker

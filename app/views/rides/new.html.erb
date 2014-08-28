@@ -3,23 +3,28 @@
   <h2>Request a Ride</h2>
   <%= form_for :ride, url:{action: "create"} do |f| %>
   <div class="col-xs-9 col-sm-6">
-    <div><%= f.label :ride_start %>
+    <div><h4>Start</h4>
     <%= f.text_field :ride_start, id: "start", data: {autocomplete_source:
                                          Ride.list_start }%></div><br />
 
-    <div><%= f.label :destination %>
+    <div><h4> Destination </h4>
     <%= f.text_field :destination, id: "destination", data: {autocomplete_source:
                                          Ride.list_destination }%></div><br />
  </div>
   <div class="col-xs-9 col-sm-6">
-    <div><%= f.label :departure_time %>
-      <%= f.text_field :departure_time %></div><br />
+    <h4> Departure Time </h4>
+    <div class="form-group">
+    <div class="input-group date" id="datetimepicker1">
+      <div style="display:inline-block"><%= f.text_field :time, class:"form-control", style:"display:inline-block" %></div>
+      <div style="display:inline-block"> <a><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+      </span> </a>
+    </div>
+    </div>
+  </div></br>
+  <div class="col-xs-9 col-sm-6"><%= f.submit "Request", {class: "btn btn-success"} %></div>
 
-    <div><%= f.label :seats_available %>
-      <%= f.text_field :seats %></div><br />
  </div>
 
-  <div class="col-xs-9 col-sm-6 col-xs-offset-9 col-sm-offset-6"><%= f.submit "Request", {class: "btn btn-success"} %></div>
 <% end %>
 </div>
 <!-- for now: not use simple form with autocomplete
@@ -32,3 +37,8 @@
   <% end %>
 </div>
 !-->
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>

@@ -7,9 +7,8 @@ class RidesController < ApplicationController
   def create
     ride = Ride.create(start: params[:ride][:ride_start],
                        destination: params[:ride][:destination],
-                       time: params[:ride][:departure_time],
-                       seats_left: params[:ride][:seats])
-    redirect_to user_path(current_user)
+                       time: DateTime.strptime(params[:ride][:time], '%m/%d/%Y %I:%M %p'))
+    redirect_to root_path
   end
   def list_start
     @start = Ride.all.order(:start).where("start like ?", "%#{params[:term]}%")

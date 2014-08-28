@@ -66,3 +66,5 @@ gem 'select2-rails'
 # later we will take advantage of this gem
 gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'bootstrap-switch-rails', '~> 3.0.2'
+gem 'momentjs-rails', '>= 2.8.1'
+gem 'bootstrap3-datetimepicker-rails', '~> 3.1.2'
