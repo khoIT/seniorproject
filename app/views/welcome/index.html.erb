@@ -2,7 +2,9 @@
 
   <!-- Table -->
   <div class="container">
+    <% if current_user then %>
     <input type="checkbox" name="driver" checked>
+    <% end %>
     <table id="rides" class="table">
     <thead>
       <th>#</th>
