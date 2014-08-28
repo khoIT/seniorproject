@@ -13,12 +13,23 @@
             <tbody>
               <tr>
                 <td><%= r.time %></td>
-                <td><%= r.seats_left %></td>
+                <% if r.seats_left.nil? %>
+                  <td class="col-md-4">
+                    <%= form_for :ride, html:{id:"seats"},
+                      url:{controller: "rides", action: "update_seats", id: r.id} do |f| %>
+                    <%= f.text_field :seats, class: "col-md-4" %>
+                    <div class="pull-right"><%= f.submit "Update", {class: "btn btn-primary"} %></div>
+                  <% end %>
+                  </td>
+                <% else %>
+                    <td><%= r.seats_left %></td>
+                <% end %>
               </tr>
               <% r.pending_passengers.each do |p| %>
               <tr>
                 <td><%= p.email %></td>
                 <td><%= button_to "Accept", {controller: "users", action: "accept", ride: r, passenger: p} %></td>
+                <td><%= button_to "Deny", {controller: "users", action: "deny", ride: r, passenger: p} %></td>
                 <td><a><span class="glyphicon glyphicon-minus"></a></td>
               </tr>
               <% end %>
@@ -39,4 +50,11 @@
   </div>
   <% end %>
   </div>
-
+  <script>
+  $('#seats').submit(function(event){
+    if ($.trim($("#ride_seats").val()).length == 0 ) {
+        event.preventDefault();
+        alert("You haven't choose seats");
+    }
+  });
+</script>

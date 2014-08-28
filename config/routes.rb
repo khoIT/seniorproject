@@ -9,7 +9,9 @@ Rideshare::Application.routes.draw do
   get 'by_start', to: 'welcome#by_start', as: :by_start
   get 'by_start_json', to: 'welcome#by_start_json'
   post 'hop_on', to: 'users#hop_on'
+  post 'update_seats', to: 'rides#update_seats'
   post 'accept', to: 'users#accept'
+  post 'deny', to: 'users#deny'
   post 'jump_off', to: 'users#jump_off'
   post 'cancel', to: 'users#cancel'
   get 'rides/list_start', to: 'rides#list_start', as: :list_start
