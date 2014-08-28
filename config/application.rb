@@ -23,6 +23,7 @@ module Rideshare
     config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.serve_static_assets = true
     config.assets.precompile += %w( .svg .eot .woff .ttf )
     config.generators do |g|
       g.test_framework :rspec
