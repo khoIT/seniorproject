@@ -23,9 +23,11 @@ class UsersController < ApplicationController
   end
 
   def switch_mode
-    if current_user.is_driver?
+    if params[:driver] == "true" then
+      session[:driver] = "false"
       current_user.update_attributes!(driver: false)
     else
+      session[:driver] = "true"
       current_user.update_attributes!(driver: true)
     end
     redirect_to root_path

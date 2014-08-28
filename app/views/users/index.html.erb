@@ -17,9 +17,10 @@
               </tr>
             </tbody>
           </table>
+
           <table class="table">
             <thead>
-              <th>User</th>
+              <th>Current Passengers</th>
             </thead>
             <tbody>
               <% r.pending_passengers.each do |p| %>
@@ -29,13 +30,11 @@
                 <td><a><span class="glyphicon glyphicon-minus"></a></td>
               </tr>
               <% end %>
+              <td>
               <% r.passengers.each do |p| %>
-              <tr>
-                <td><%= p.name %></td>
-                <td><a><span class="glyphicon glyphicon-plus"></a></td>
-                <td><a><span class="glyphicon glyphicon-minus"></a></td>
-              </tr>
+                <%= p.email %>
               <% end %>
+            </td>
             </tbody>
           </table>
         </div>
