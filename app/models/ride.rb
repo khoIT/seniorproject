@@ -5,6 +5,10 @@ class Ride < ActiveRecord::Base
 
    belongs_to :user, inverse_of: :rides
 
+   scope :current, -> {where("time >= ?", Time.now)}
+   scope :active, -> {where("seats_left >= ?", 0)}
+
+   #return pending_passengers of this ride
    def pending_passengers
      ids = []
      passenger_rides = self.passenger_rides.where(confirmed: "false")
@@ -15,6 +19,7 @@ class Ride < ActiveRecord::Base
    end
 
    def accept(user)
+     debugger
      self.passenger_rides.find_by_passenger_id(user.id).update_attributes!(confirmed: "true")
      self.seats_left -= 1
      self.save!

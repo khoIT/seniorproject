@@ -16,7 +16,7 @@ r3 = Ride.create(start: 'Louisville', destination: 'DePauw', time: Time.new(2015
 r4 = Ride.create(start: 'New York', destination: 'DePauw', time: Time.new(2014, 9, 9, 22, 35, 0), seats_left: 4)
 r5 = Ride.create(start: 'DePauw', destination: 'Boston', time: Time.new(2014, 10, 9, 22, 35, 0), seats_left: 4)
 r6 = Ride.create(start: 'DePauw', destination: 'Walmart', time: Time.new(2014, 11, 9, 22, 35, 0), seats_left: 6)
-r7 = Ride.create(start: 'Walmart', destination: 'DePauw', time: Time.new(2014, 10, 13, 22, 35, 0), seats_left: 5)
+r7 = Ride.create(start: 'Walmart', destination: 'DePauw', time: Time.new(2013, 10, 13, 22, 35, 0), seats_left: 5)
 r8 = Ride.create(start: '407 S.Jackson', destination: 'Prindle Institute', time: Time.new(2014, 10, 13, 22, 35, 0), seats_left: 4)
 u1.fares << [r1,r2, r3]
 r1.passengers << u2
