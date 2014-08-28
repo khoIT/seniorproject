@@ -3,7 +3,7 @@
   <% current_user.fares.each do |r| %>
   <div class="col-md-4">
       <div class="panel panel-success">
-        <div class="panel-heading"><%= r.start %> to <%= r.destination %></div>
+        <div class="panel-heading"><b><%= r.start %></b> to <b><%= r.destination %></b></div>
         <div class="panel-body">
           <table class="table">
             <thead>
@@ -15,26 +15,23 @@
                 <td><%= r.time %></td>
                 <td><%= r.seats_left %></td>
               </tr>
-            </tbody>
-          </table>
-
-          <table class="table">
-            <thead>
-              <th>Current Passengers</th>
-            </thead>
-            <tbody>
               <% r.pending_passengers.each do |p| %>
               <tr>
-                <td><%= p.name %></td>
+                <td><%= p.email %></td>
                 <td><%= button_to "Accept", {controller: "users", action: "accept", ride: r, passenger: p} %></td>
                 <td><a><span class="glyphicon glyphicon-minus"></a></td>
               </tr>
               <% end %>
-              <td>
+              <tr><td><b>Current Passengers</b></td></tr>
               <% r.passengers.each do |p| %>
+              <tr><td>
                 <%= p.email %>
+                </tr></td>
               <% end %>
-            </td>
+              <% if !r.comment.nil? then %>
+              <tr><td><b>Comments: </b></td></tr>
+              <tr><td><%= r.comment %></td></tr>
+            <% end %>
             </tbody>
           </table>
         </div>

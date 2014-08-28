@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
      self.rides.delete(ride)
   end
 
+  def cancel!(ride)
+     self.rides.delete(ride)
+  end
+
   def pending?(ride)
      ride = self.passenger_rides.find_by_ride_id(ride.id)
      ride ? ride.confirmed == false : false

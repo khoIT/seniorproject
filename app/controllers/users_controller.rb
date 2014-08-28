@@ -16,6 +16,12 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def cancel
+    @ride = Ride.find_by_id(params[:ride])
+    current_user.cancel!(@ride)
+    redirect_to root_path
+  end
+
   def accept
     @ride = current_user.fares.find_by_id(params[:ride])
     @ride.accept(User.find_by_id(params[:passenger]))
@@ -37,7 +43,7 @@ class UsersController < ApplicationController
     if current_user.is_driver? then
       @ride = Ride.find_by_id(params[:ride])
       current_user.drive!(@ride)
-      redirect_to root_path
+      redirect_to user_path(current_user)
     else
       redirect_to root_path, notice: "You must be a driver to do this"
     end

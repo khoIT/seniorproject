@@ -11,6 +11,7 @@ Rideshare::Application.routes.draw do
   post 'hop_on', to: 'users#hop_on'
   post 'accept', to: 'users#accept'
   post 'jump_off', to: 'users#jump_off'
+  post 'cancel', to: 'users#cancel'
   get 'rides/list_start', to: 'rides#list_start', as: :list_start
   get 'rides/new', to: 'rides#new', as: :new_ride
   post 'create_ride', to: 'rides#create', as: :create_ride

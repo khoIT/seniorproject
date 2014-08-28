@@ -7,7 +7,8 @@ class RidesController < ApplicationController
   def create
     ride = Ride.create(start: params[:ride][:ride_start],
                        destination: params[:ride][:destination],
-                       time: DateTime.strptime(params[:ride][:time], '%m/%d/%Y %I:%M %p'))
+                       time: DateTime.strptime(params[:ride][:time], '%m/%d/%Y %I:%M %p'),
+                       comment: params[:ride][:comment])
     redirect_to root_path
   end
   def list_start

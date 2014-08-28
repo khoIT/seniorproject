@@ -29,7 +29,7 @@
             <% elsif current_user.pending?(r) %>
               <label style="display:inline-block" class="btn btn-warning">Pending</label>
               <div style="display:inline-block">
-                <%= button_to "Jump off", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+                <%= button_to "Jump off", {controller:'users', action:'cancel', ride: r.id}, {class: 'btn btn-danger'} %>
               </div>
             <% elsif !current_user.driver?(r) %>
               <div style="display:inline-block">
