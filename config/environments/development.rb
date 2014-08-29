@@ -1,6 +1,9 @@
 Rideshare::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  ENV['FACEBOOK_APP_ID'] = "559857074118686";
+  ENV['FACEBOOK_SECRET'] = "a892c1eac456baa8af35bc9b79f0476c";
+  ENV['GOOGLE_APP_ID'] = "934705303341-m29bpe28qipvre063g9m8t76r4qs8mfs.apps.googleusercontent.com";
+  ENV['GOOGLE_SECRET'] = "MIltu11G3zqa4kcKycV5OZFq";
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

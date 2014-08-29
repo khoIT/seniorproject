@@ -19,7 +19,6 @@
 <% end -%>
 
 <%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
-  <% end -%>
+  <a class="btn btn-block btn-social btn-facebook" href="/users/auth/facebook"><i class="fa fa-facebook"></i>Sign in with Facebook</a>
+  <a class="btn btn-block btn-social btn-google-plus" href="/users/auth/google_oauth2"><i class="fa fa-google"></i>Sign in with Google</a>
 <% end -%>
