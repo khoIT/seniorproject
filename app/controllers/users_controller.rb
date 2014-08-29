@@ -32,7 +32,6 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user)
   end
 
-<<<<<<< HEAD
   #driver deny passenger's request
   def deny
     @ride = current_user.fares.find_by_id(params[:ride])
@@ -63,7 +62,6 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-=======
   #driver accept ride
   def drive
     if current_user.is_driver? then
@@ -87,5 +85,4 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
->>>>>>> 2d09c29f0ebfb765715c50bae05e6aa134e8bc98
 end
