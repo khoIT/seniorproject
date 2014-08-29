@@ -1,4 +1,8 @@
 Rideshare::Application.configure do
+  ENV['FACEBOOK_APP_ID'] = "559857074118686";
+  ENV['FACEBOOK_SECRET'] = "a892c1eac456baa8af35bc9b79f0476c";
+  ENV['GOOGLE_APP_ID'] = "934705303341-m29bpe28qipvre063g9m8t76r4qs8mfs.apps.googleusercontent.com";
+  ENV['GOOGLE_SECRET'] = "MIltu11G3zqa4kcKycV5OZFq";
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
