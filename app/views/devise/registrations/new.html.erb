@@ -4,9 +4,12 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %>
-  <%= f.email_field :email, autofocus: true %></div>
-
+    <div><%= f.label :email %>
+  <% if session["devise.google_data"].info.email then %>
+    <%= f.email_field :email, value:session["devise.google_data"].info.email, readonly: true %></div>
+  <% else %>
+    <%= f.email_field :email, autofocus: true %></div>
+  <% end %>
   <div><%= f.label :password %>
     <%= f.password_field :password, autocomplete: "off" %></div>
 
@@ -15,5 +18,7 @@
 
   <div><%= f.submit "Sign up", class:"btn btn-primary" %></div>
 <% end %>
-<%= render "devise/shared/links" %>
+  <% if session["devise.google_data"].info.email.nil? then %>
+    <%= render "devise/shared/links" %>
+  <% end %>
 </div>
