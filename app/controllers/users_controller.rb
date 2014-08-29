@@ -32,6 +32,7 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+<<<<<<< HEAD
   #driver deny passenger's request
   def deny
     @ride = current_user.fares.find_by_id(params[:ride])
@@ -62,4 +63,29 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+=======
+  #driver accept ride
+  def drive
+    if current_user.is_driver? then
+      @ride = Ride.find_by_id(params[:ride])
+      current_user.drive!(@ride)
+      redirect_to user_path(current_user)
+    else
+      redirect_to root_path, notice: "You must be a driver to do this"
+    end
+  end
+
+  #user switch between driver mode to passenger
+  def switch_mode
+    if params[:driver] == "true" then
+      session[:driver] = "false"
+      current_user.update_attributes!(driver: false)
+    else
+      session[:driver] = "true"
+      current_user.update_attributes!(driver: true)
+    end
+    redirect_to root_path
+  end
+
+>>>>>>> 2d09c29f0ebfb765715c50bae05e6aa134e8bc98
 end
