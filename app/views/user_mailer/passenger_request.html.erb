@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h4>Hi <%= @driver.email %>,</h4>
+    <p>
+    <%= @rider.email  %> has just asked to join your <%= link_to "ride", user_url(@driver) %>.<br>
+    </p>
+    <p>Please click the link above and respond to <%= @rider.email %>!</p>
+    <p>Thank you and have a pleasant ride!</p>
+    <p> Best, </p>
+    <p> Khoi </p>
+  </body>
+</html>

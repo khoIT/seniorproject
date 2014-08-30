@@ -35,7 +35,7 @@
               </div>
             <% elsif !current_user.driver?(r) %>
               <div style="display:inline-block">
-                <%= button_to "Hop on!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+                <%= button_to "Join!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
               </div>
               <% if current_user.is_driver? then %>
                   <div style="display:inline-block">
@@ -46,7 +46,7 @@
             <!--//view as guest!-->
           <% elsif r.seats_left != 0 %>
               <div style="display:inline-block">
-              <%= button_to "Hop on!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+              <%= button_to "Join!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
               </div>
           <% end %>
       </td>

@@ -12,7 +12,7 @@
             </thead>
             <tbody>
               <tr>
-                <td><%= r.time %></td>
+                <td><%= r.time.strftime("%b-%d %H:%M") %></td>
                 <% if r.seats_left.nil? %>
                   <td class="col-md-4">
                     <%= form_for :ride, html:{id:"seats"},
@@ -48,6 +48,30 @@
         </div>
       </div> <!--end panel!-->
   </div>
+  <% end %>
+  <!-- normal ride -->
+  <% current_user.rides.each do |r| %>
+  <% if !current_user.pending?(r) %>
+  <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><b><%= r.start %></b> to <b><%= r.destination %></b></div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <th>Depar Time</th>
+              <th>Driver's contact</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= r.time.strftime("%b-%d %H:%M")%></td>
+                <td><%= current_user.email %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+  <% end %>
   <% end %>
   </div>
   <script>

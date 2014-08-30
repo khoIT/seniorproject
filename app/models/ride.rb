@@ -19,7 +19,6 @@ class Ride < ActiveRecord::Base
    end
 
    def accept(user)
-     debugger
      self.passenger_rides.find_by_passenger_id(user.id).update_attributes!(confirmed: "true")
      self.seats_left -= 1
      self.save!

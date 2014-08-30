@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h4>Hi <%= @rider.email %>,</h4>
+    <p>
+    <%= @driver.email  %> has just matched your request.<br>
+    </p>
+    <p>Please find the itinerary <%= link_to "here", user_url(@rider) %>. Feel free to exchange contacts!</p>
+    <p>Thank you and have a pleasant ride!</p>
+    <p> Best, </p>
+    <p> Khoi </p>
+  </body>
+</html>

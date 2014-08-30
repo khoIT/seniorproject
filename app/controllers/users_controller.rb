@@ -8,6 +8,8 @@ class UsersController < ApplicationController
   def hop_on
     @ride = Ride.find_by_id(params[:ride])
     current_user.hop_in!(@ride)
+    @driver = User.find_by_id(@ride.driver_id)
+    UserMailer.passenger_request(@driver, current_user).deliver
     redirect_to root_path
   end
 
@@ -28,7 +30,10 @@ class UsersController < ApplicationController
   #driver accept passenger's request
   def accept
     @ride = current_user.fares.find_by_id(params[:ride])
-    @ride.accept(User.find_by_id(params[:passenger]))
+    @rider = User.find_by_id(params[:passenger])
+
+    @ride.accept(@rider)
+    UserMailer.passenger_accept(current_user, @rider).deliver
     redirect_to user_path(current_user)
   end
 

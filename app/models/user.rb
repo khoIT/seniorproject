@@ -42,8 +42,8 @@ class User < ActiveRecord::Base
   end
 
   def pending?(ride)
-     ride = self.passenger_rides.find_by_ride_id(ride.id)
-     ride ? ride.confirmed == false : false
+     passenger_ride = self.passenger_rides.find_by_ride_id(ride.id)
+     passenger_ride ? passenger_ride.confirmed == false : false
   end
 
   def is_driver?
@@ -74,6 +74,6 @@ class User < ActiveRecord::Base
   private
 
     def send_welcome_email
-      UserMailer.signup_confirmation(self).deliver
+      UserMailer.welcome(self).deliver
     end
 end
