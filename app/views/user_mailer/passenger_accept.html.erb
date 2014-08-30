@@ -4,12 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h4>Hi <%= @rider.email %>,</h4>
+    <h4>You guys are matched!</h4>
     <p>
-    <%= @driver.email  %> has just matched your request.<br>
+      Hi <%= @rider.email, %>, <%= @driver.email  %> has just matched your request. I include you two in this email.<br>
     </p>
-    <p>Please find the itinerary <%= link_to "here", user_url(@rider) %>. Feel free to exchange contacts!</p>
-    <p>Thank you and have a pleasant ride!</p>
+    <p>Please find your itinerary <%= link_to "here", user_url(@rider) %> and feel free to exchange contacts!</p>
+    <p>Thank you and have a pleasant ride together!</p>
     <p> Best, </p>
     <p> Khoi </p>
   </body>
