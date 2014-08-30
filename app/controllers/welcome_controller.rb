@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    @all_rides = Ride.current.active
+    @all_rides = Ride.current
   end
 
   def by_start
