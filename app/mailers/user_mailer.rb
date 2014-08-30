@@ -18,6 +18,6 @@ class UserMailer < ActionMailer::Base
     @driver = driver
     @rider = rider
 
-    mail to: [rider.email, driver.email], subject: "Congrats #{@rider.email}! You ride is here"
+    mail to: [rider.email, driver.email], subject: "Congrats! You ride is here"
   end
 end
