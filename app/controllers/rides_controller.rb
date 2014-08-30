@@ -11,7 +11,7 @@ class RidesController < ApplicationController
                        time: DateTime.strptime(params[:ride][:time], '%m/%d/%Y %I:%M %p'),
                        comment: params[:ride][:comment])
     ride.passengers << current_user
-    ride.passenger_rides.find_by_passenger_id(user.id).update_attributes!(confirmed: "true")
+    ride.passenger_rides.find_by_passenger_id(current_user.id).update_attributes!(confirmed: "true")
     redirect_to root_path
   end
 

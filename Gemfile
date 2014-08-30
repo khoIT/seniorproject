@@ -72,3 +72,6 @@ gem 'omniauth-facebook'
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem "font-awesome-rails"
 gem "omniauth-google-oauth2"
+group :development, :test do
+  gem 'foreman'
+end
