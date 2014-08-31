@@ -25,3 +25,4 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require date
+//= require angular

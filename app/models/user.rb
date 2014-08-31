@@ -32,8 +32,12 @@ class User < ActiveRecord::Base
   end
 
   def jump_off!(ride)
-     ride.seats_left += 1
-     ride.save!
+     if !ride.seats_left.nil? then
+       ride.seats_left += 1
+       ride.save!
+     else
+       ride.destroy
+     end
      self.rides.delete(ride)
   end
 

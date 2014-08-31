@@ -76,3 +76,4 @@ group :development, :test do
   gem 'foreman'
 end
 gem 'datejs-rails'
+gem 'angularjs-rails'
