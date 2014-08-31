@@ -11,8 +11,8 @@ class Ride < ActiveRecord::Base
    #return pending_passengers of this ride
    def pending_passengers
      ids = []
-     passenger_rides = self.passenger_rides.where(confirmed: "false")
-     passenger_rides.each do |p|
+     pending_rides = self.passenger_rides.where(confirmed: "false")
+     pending_rides.each do |p|
        ids << p.passenger_id
      end
      User.find(ids)
@@ -40,5 +40,12 @@ class Ride < ActiveRecord::Base
      Ride.all.map(&:destination).uniq.sort
    end
 
+   def not_has_driver?
+     self.driver_id.nil?
+   end
+
+   def pending?(user)
+     pending_passengers.include?(user)
+   end
 end
 

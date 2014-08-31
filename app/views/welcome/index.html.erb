@@ -7,7 +7,9 @@
     <% end %>
     <table id="rides" class="table">
     <thead>
-      <th>#</th>
+      <% if current_user then %>
+        <th>Status</th>
+      <% end %>
       <th>Driver</th>
       <th>From</th>
       <th>Destination</th>
@@ -18,7 +20,17 @@
     <tbody>
     <% @all_rides.each do |r| %>
       <tr>
-      <td class="col-xs-1 col-md-1"><%= r.id %></td>
+      <td class="col-xs-1 col-md-1">
+      <% if current_user then %>
+        <% if r.not_has_driver? then %>
+          <h4><label style="display:inline-block" class="label label-warning">Pending</label></h4>
+        <% elsif r.seats_left == 0 %>
+          <h4><label style="display:inline-block" class="label label-warning">Full</label></h4>
+        <% else %>
+          <h4><label style="display:inline-block" class="label label-success lable-lg">Active</label></h4>
+        <% end %>
+      <% end %>
+      </td>
       <td class="col-xs-1 col-md-1"><%= User.find_by_id(r.driver_id)? User.find_by_id(r.driver_id).name : ""%></td>
       <td class="col-xs-2 col-md-2"><%= r.start %></td>
       <td class="col-xs-2 col-md-2"><%= r.destination %></td>
@@ -27,9 +39,10 @@
       <td>
           <% if current_user then %>
             <% if current_user.passenger?(r) %>
-              <%= button_to "Jump off", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+              <div style="display:inline-block">
+                <%= button_to "Jump off", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+              </div>
             <% elsif current_user.pending?(r) %>
-              <label style="display:inline-block" class="btn btn-warning">Pending</label>
               <div style="display:inline-block">
                 <%= button_to "Jump off", {controller:'users', action:'cancel', ride: r.id}, {class: 'btn btn-danger'} %>
               </div>
@@ -38,7 +51,7 @@
                 <%= button_to "Join!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
               </div>
             <% end %>
-            <% if current_user.is_driver? then %>
+            <% if current_user.is_driver? && !current_user.passenger?(r) then %>
                 <div style="display:inline-block">
                   <%= button_to "Drive!", {controller:'users', action:'drive', ride: r.id}, {class: 'btn btn-primary'} %>
                 </div>
