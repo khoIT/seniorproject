@@ -75,3 +75,4 @@ gem "omniauth-google-oauth2"
 group :development, :test do
   gem 'foreman'
 end
+gem 'datejs-rails'

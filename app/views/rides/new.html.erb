@@ -15,7 +15,7 @@
     <h4> Departure Time </h4>
     <div class="form-group">
     <div class="input-group date" id="datetimepicker1">
-      <div style="display:inline-block"><%= f.text_field :time, class:"form-control", style:"display:inline-block" %></div>
+      <div style="display:inline-block"><%= f.text_field :time, id: "time", class:"form-control", style:"display:inline-block" %></div>
       <div style="display:inline-block"> <a><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
       </span> </a>
     </div>
@@ -30,7 +30,15 @@
 <% end %>
 </div>
 <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
+  $(function () {
+      $('#datetimepicker1').datetimepicker();
+  });
+  $('form').submit(function(){
+    var day = new Date($('#time').val().toString()).getDate();
+    var today = new Date().getDate();
+    if (day == today){
+      alert("Your requested time is too near! Please allow 24 hours for responses");
+      event.preventDefault();
+    }
+  });
 </script>

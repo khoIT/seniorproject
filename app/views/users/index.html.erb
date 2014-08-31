@@ -64,7 +64,9 @@
             <tbody>
               <tr>
                 <td><%= r.time.strftime("%b-%d %H:%M")%></td>
-                <td><%= current_user.email %></td>
+                <% if User.find_by_id(r.driver_id) %>
+                  <td><%= User.find_by_id(r.driver_id).email%></td>
+                <% end %>
               </tr>
             </tbody>
           </table>
