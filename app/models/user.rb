@@ -55,12 +55,13 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      #user.image = auth.info.image # assuming the user model has an image
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.email = auth.info.email
+    data = auth.info
+    user = User.where("email = ? AND provider = ? AND uid = ? ",data["email"], auth.provider, auth.info).first
+    debugger
+    unless user
+        user = User.new
     end
+    user
   end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
@@ -70,9 +71,8 @@ class User < ActiveRecord::Base
     # Uncomment the section below if you want users to be created if they don't exist
      unless user
          user = User.new
-         user
      end
-    user
+     user
   end
 
   private
