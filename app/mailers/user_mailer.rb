@@ -7,6 +7,13 @@ class UserMailer < ActionMailer::Base
     mail to: user.email, subject: "Welcome to DePauw Rides"
   end
 
+  def match(user, ride)
+    @user = user
+    @ride = ride
+
+    mail to: user.email, subject: "We found a ride that matches your requests"
+  end
+
   def passenger_request(driver, rider)
     @driver = driver
     @rider = rider

@@ -7,13 +7,13 @@ RSpec.describe User, :type => :model do
     @ride2 = FactoryGirl.create(:ride)
     @ride3 = FactoryGirl.create(:ride)
     @ride4 = FactoryGirl.create(:ride)
-    @user.hop_in!(@ride1)
+    @user.hop_on!(@ride1)
     @ride1.passenger_rides.find_by_passenger_id(@user.id).update_attributes(confirmed: "true")
     @ride1.seats_left -= 1
-    @user.hop_in!(@ride2)
+    @user.hop_on!(@ride2)
     @ride2.passenger_rides.find_by_passenger_id(@user.id).update_attributes(confirmed: "true")
     @ride2.seats_left -= 1
-    @user.hop_in!(@ride2)
+    @user.hop_on!(@ride2)
     @user.fares << @ride3
   end
 
@@ -33,7 +33,7 @@ RSpec.describe User, :type => :model do
   end
 
   it 'should be able to hop in rides' do
-    @user.hop_in!(@ride4)
+    @user.hop_on!(@ride4)
     expect(@ride4.passengers).to include(@user)
   end
 

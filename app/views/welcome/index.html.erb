@@ -51,7 +51,7 @@
                 <%= button_to "Join!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
               </div>
             <% end %>
-            <% if current_user.is_driver? && !current_user.passenger?(r) then %>
+            <% if !current_user.is_driver? && !current_user.passenger?(r) then %>
                 <div style="display:inline-block">
                   <%= button_to "Drive!", {controller:'users', action:'drive', ride: r.id}, {class: 'btn btn-primary'} %>
                 </div>

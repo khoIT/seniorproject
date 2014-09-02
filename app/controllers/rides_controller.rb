@@ -6,13 +6,20 @@ class RidesController < ApplicationController
 
   #create a new ride upon request
   def create
-    ride = Ride.create(start: params[:ride][:ride_start],
-                       destination: params[:ride][:destination],
-                       time: DateTime.strptime(params[:ride][:time], '%m/%d/%Y %I:%M %p'),
-                       comment: params[:ride][:comment])
-    ride.passengers << current_user
-    ride.passenger_rides.find_by_passenger_id(current_user.id).update_attributes!(confirmed: "true")
-    redirect_to root_path
+      ride = Ride.create(start: params[:ride][:ride_start],
+                         destination: params[:ride][:destination],
+                         time: DateTime.strptime(params[:ride][:time], '%m/%d/%Y %I:%M %p'),
+                         comment: params[:ride][:comment])
+      ride.passengers << current_user
+      ride.passenger_rides.find_by_passenger_id(current_user.id).update_attributes!(confirmed: "true")
+
+    if ride.matches.any? then
+      UserMailer.match(current_user, ride).deliver
+      session[:request] = ride
+      redirect_to controller: 'welcome', action: 'index', ride: ride, notice: "We found some rides that may match your request!"
+    else
+      redirect_to root_path
+    end
   end
 
   def update_seats

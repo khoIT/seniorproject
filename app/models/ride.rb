@@ -47,5 +47,11 @@ class Ride < ActiveRecord::Base
    def pending?(user)
      pending_passengers.include?(user)
    end
+
+   #if ride has same start anad destination and less than 12 hours then matches ? returns
+   def matches
+     Ride.where("start = ? AND destination = ? AND id != ?", self.start, self.destination, self.id).
+       where({time: (self.time - 12.hour)..(self.time + 12.hour)})
+   end
 end
 

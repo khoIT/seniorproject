@@ -6,10 +6,14 @@ class UsersController < ApplicationController
 
   #passenger request to join ride
   def hop_on
+    debugger
     @ride = Ride.find_by_id(params[:ride])
-    current_user.hop_in!(@ride)
+    current_user.hop_on!(@ride)
     @driver = User.find_by_id(@ride.driver_id)
     UserMailer.passenger_request(@driver, current_user).deliver
+    if session[:request]
+      (session[:request]).destroy
+    end
     redirect_to root_path
   end
 

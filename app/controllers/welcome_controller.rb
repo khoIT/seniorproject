@@ -1,6 +1,10 @@
 class WelcomeController < ApplicationController
   def index
-    @all_rides = Ride.current
+    if params[:ride] then
+      @all_rides = Ride.find_by_id(params[:ride]).matches
+    else
+      @all_rides = Ride.current
+    end
   end
 
   def by_start
