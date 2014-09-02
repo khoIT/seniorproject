@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
   #passenger request to join ride
   def hop_on
-    debugger
     @ride = Ride.find_by_id(params[:ride])
     current_user.hop_on!(@ride)
     @driver = User.find_by_id(@ride.driver_id)
