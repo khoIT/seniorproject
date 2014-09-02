@@ -22,7 +22,7 @@
       <tr>
       <td class="col-xs-1 col-md-1">
       <% if current_user then %>
-        <% if r.not_has_driver? then %>
+        <% if r.not_has_driver? || current_user.pending?(r) then %>
           <h4><label style="display:inline-block" class="label label-warning">Pending</label></h4>
         <% elsif r.seats_left == 0 %>
           <h4><label style="display:inline-block" class="label label-warning">Full</label></h4>

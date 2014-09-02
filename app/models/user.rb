@@ -57,7 +57,6 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     data = auth.info
     user = User.where("email = ? AND provider = ? AND uid = ? ",data["email"], auth.provider, auth.info).first
-    debugger
     unless user
         user = User.new
     end
