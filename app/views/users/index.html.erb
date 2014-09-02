@@ -25,12 +25,14 @@
                     <td><%= r.seats_left %></td>
                 <% end %>
               </tr>
+              <% if r.pending_passengers.any? %>
+                <tr><td><b>Pending Passengers</b></td></tr>
+              <% end %>
               <% r.pending_passengers.each do |p| %>
               <tr>
                 <td><%= p.email %></td>
                 <td><%= button_to "Accept", {controller: "users", action: "accept", ride: r, passenger: p} %></td>
                 <td><%= button_to "Deny", {controller: "users", action: "deny", ride: r, passenger: p} %></td>
-                <td><a><span class="glyphicon glyphicon-minus"></a></td>
               </tr>
               <% end %>
               <tr><td><b>Current Passengers</b></td></tr>
@@ -58,7 +60,7 @@
         <div class="panel-body">
           <table class="table">
             <thead>
-              <th>Depar Time</th>
+              <th>Depart Time</th>
               <th>Driver's contact</th>
             </thead>
             <tbody>
