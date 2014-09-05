@@ -25,8 +25,8 @@
   max-width: 300px;
   padding: 19px 29px 29px;
   margin: 0 auto 20px;
-  background-color: #fff;
-  border: 1px solid #e5e5e5;
+  background-color: #ccc;
+  border: 1px solid #ccc;
   -webkit-border-radius: 5px;
      -moz-border-radius: 5px;
           border-radius: 5px;
@@ -46,4 +46,58 @@
   height: auto;
   margin-bottom: 15px;
   padding: 7px 9px;
+}
+.sb-page-header{
+    height: 200px;
+    background: url("../images/radial.png") no-repeat center;
+    -webkit-font-smoothing: antialiased;
+   border-bottom: 4px solid #F1CB00; min-width: 940px;
+}
+.sb-page-header h1{
+  color: #fff;
+  margin-top: 70px;
+  font-size: 72px;
+  font-family: "adobe-caslon-pro","Georgia",serif;
+}
+.black-depauw{
+  background: #222;
+}
+.nav{
+   overflow: hidden;
+ }
+.content{
+  background: #CCC;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 4px solid #F1CB00; min-width: 940px;
+}
+.nav-tabs > li > a{
+  color: #ffffff;
+}
+.nav-tabs > li > a:hover{
+  color: #F1CB00;
+}
+.nav-tabs > li{
+  color: #aaa;
+}
+strong{
+  color: #F1CB00
+}
+.btn-depauw{
+  background: #F1CB00 !important;
+}
+.alert-success{
+  background: #F1CB00 !important;
+  border: #F1CB00 !important;
+  color: #222 !important;
+}
+.alert .close{
+  right: 8px !important;
+}
+.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary,
+.bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary{
+  background: #F1CB00 !important;
+}
+.label-warning{
+
 }

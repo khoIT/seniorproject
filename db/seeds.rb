@@ -9,15 +9,12 @@ u1 = User.create(name: 'Khoi', password:'123!@#ab', email: 'khoitran_2014@depauw
 u2 = User.create(name: 'Anna', password:'123!@#ab', email: 'annasmith_2015@depauw.edu')
 u3 = User.create(name: 'Jack', password:'123!@#ab', email: 'jackallen_2016@depauw.edu', driver: true)
 u4 = User.create(name: 'Amelia', password:'123!@#ab', email: 'ameliachan_2017@depauw.edu')
-r1 = Ride.create(start: 'DePauw', destination: 'Chicago', time: Time.new(2014, 9, 21, 22, 35, 0), seats_left: 2)
+r1 = Ride.create(start: 'DePauw', destination: 'Chicago', time: Time.new(2014, 9, 21, 22, 35, 0), seats_left: 3)
 r2 = Ride.create(start: 'DePauw', destination: 'Indy', time: Time.new(2014, 10, 29, 22, 35, 0), seats_left: 2)
 r3 = Ride.create(start: 'Louisville', destination: 'DePauw', time: Time.new(2015, 3, 19, 22, 35, 0), seats_left: 3)
-r4 = Ride.create(start: 'DePauw', destination: 'Walmart', time: Time.new(2014, 11, 9, 22, 35, 0), seats_left: 6)
-r5 = Ride.create(start: 'Walmart', destination: 'DePauw', time: Time.new(2013, 10, 13, 22, 35, 0), seats_left: 5)
-r6 = Ride.create(start: '407 S.Jackson', destination: 'Prindle Institute', time: Time.new(2014, 10, 13, 22, 35, 0), seats_left: 4)
+r4 = Ride.create(start: 'DePauw', destination: 'Walmart', time: Time.new(2014, 11, 9, 22, 35, 0), seats_left: 3)
 u1.fares << [r1,r2,r3]
-u2.fares << [r4,r5,r6]
 r1.passengers << u2
 r1.passenger_rides.find_by_passenger_id(u2.id).update_attributes!(confirmed: "true")
-r2.passengers << u3
-r2.passenger_rides.find_by_passenger_id(u3.id).update_attributes!(confirmed: "true")
+r1.passengers << u3
+r1.passenger_rides.find_by_passenger_id(u3.id).update_attributes!(confirmed: "true")
