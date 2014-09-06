@@ -13,15 +13,19 @@
       <th>Driver</th>
       <th>From</th>
       <th>Destination</th>
-      <th>Departure</th>
+      <% if current_user then %>
+        <th>Departure</th>
+      <% end %>
       <th>Seats</th>
-      <th>Action</th>
+      <% if current_user then %>
+        <th>Action</th>
+      <% end %>
     </thead>
     <tbody>
     <% @all_rides.each do |r| %>
       <tr>
-      <td class="col-xs-1 col-md-1">
       <% if current_user then %>
+      <td class="">
         <% if r.not_has_driver? || current_user.pending?(r) then %>
           <h4><label style="display:inline-block" class="label label-warning">Pending</label></h4>
         <% elsif r.seats_left == 0 %>
@@ -29,15 +33,17 @@
         <% else %>
           <h4><label style="display:inline-block" class="label label-success lable-lg">Active</label></h4>
         <% end %>
-      <% end %>
       </td>
-      <td class="col-xs-1 col-md-1"><%= User.find_by_id(r.driver_id)? User.find_by_id(r.driver_id).name : ""%></td>
-      <td class="col-xs-2 col-md-2"><%= r.start %></td>
-      <td class="col-xs-2 col-md-2"><%= r.destination %></td>
-      <td class="col-xs-2 col-md-2"><%= r.time.strftime("%b-%d %H:%M") %></td>
-      <td class="col-xs-1 col-md-1"><%= r.seats_left %></td>
-      <td>
+      <% end %>
+      <td class=""><%= User.find_by_id(r.driver_id)? User.find_by_id(r.driver_id).name : ""%></td>
+      <td class=""><%= r.start %></td>
+      <td class=""><%= r.destination %></td>
+      <% if current_user then %>
+        <td class=""><%= r.time.strftime("%b-%d %H:%M") %></td>
+      <% end %>
+      <td class=""><%= r.seats_left %></td>
           <% if current_user then %>
+          <td>
             <% if current_user.passenger?(r) %>
               <div style="display:inline-block">
                 <%= button_to "Jump off", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
@@ -56,20 +62,24 @@
                   <%= button_to "Drive!", {controller:'users', action:'drive', ride: r.id}, {class: 'btn btn-primary'} %>
                 </div>
             <% end %>
+        </td>
           <% end %>
-      </td>
     </tr>
     <% end %>
     </tbody>
   </table>
 </div>
+<%= render partial: "layouts/footer" %>
 <script>
   $(document).ready(function() {
-    $('#rides').dataTable({
+    var table = $('#rides').dataTable({
       "paging": false,
-      "scrollY":        "800px",
+      "scrollY": "800px",
       "scrollCollapse": true,
+      "bAutoWidth": false,
+      "dom": '<"toolbar">frtip'
     });
+     $("div.toolbar").html('<b>Hi! We currently have these available rides:</b>');
   } );
     window.switch = <%= session[:driver] %>
     $('input[name="driver"]').bootstrapSwitch('state', window.switch, true);

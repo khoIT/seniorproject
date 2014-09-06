@@ -2,7 +2,7 @@
   <div class="container-fluid">
   <% current_user.fares.each do |r| %>
   <div class="col-md-4">
-      <div class="panel panel-success">
+      <div class="panel panel-depauw">
         <div class="panel-heading"><b><%= r.start %></b> to <b><%= r.destination %></b></div>
         <div class="panel-body">
           <table class="table">
@@ -78,6 +78,7 @@
   <% end %>
   <% end %>
   </div>
+<%= render partial: "layouts/footer" %>
   <script>
   $('#seats').submit(function(event){
     if ($.trim($("#ride_seats").val()).length == 0 ) {

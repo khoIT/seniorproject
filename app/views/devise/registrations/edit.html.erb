@@ -19,7 +19,7 @@
   <div><%= f.label :current_password %> <i><small>(to confirm your changes)</small></i>
     <%= f.password_field :current_password, autocomplete: "off" %></div>
 
-  <div><%= f.submit "Update", class:"btn btn-primary" %></div>
+  <div><%= f.submit "Update", class:"btn btn-depauw" %></div>
 <% end %>
 
 <h3>Cancel my account</h3>
@@ -28,3 +28,4 @@
 
 <%= link_to "Back", :back %>
 </div>
+<%= render partial: "layouts/footer" %>
