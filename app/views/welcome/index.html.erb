@@ -46,11 +46,11 @@
           <td>
             <% if current_user.passenger?(r) %>
               <div style="display:inline-block">
-                <%= button_to "Jump off", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+                <%= button_to "Cancel", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
               </div>
             <% elsif current_user.pending?(r) %>
               <div style="display:inline-block">
-                <%= button_to "Jump off", {controller:'users', action:'cancel', ride: r.id}, {class: 'btn btn-danger'} %>
+                <%= button_to "Cancel", {controller:'users', action:'cancel', ride: r.id}, {class: 'btn btn-danger'} %>
               </div>
             <% elsif !current_user.driver?(r) && r.seats_left != 0 %>
               <div style="display:inline-block">
@@ -59,7 +59,7 @@
             <% end %>
             <% if current_user.is_driver? && !current_user.passenger?(r) then %>
                 <div style="display:inline-block">
-                  <%= button_to "Drive!", {controller:'users', action:'drive', ride: r.id}, {class: 'btn btn-primary'} %>
+                  <%= button_to "Drive!", {controller:'users', action:'drive', ride: r.id}, {class: 'btn btn-depauw'} %>
                 </div>
             <% end %>
         </td>

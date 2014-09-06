@@ -86,6 +86,12 @@ strong{
 .btn-depauw{
   background: #F1CB00 !important;
 }
+.btn-danger{
+  background: #b92c28 !important;
+}
+.btn-success{
+  background: #3e8f3e !important;
+}
 .panel-depauw > .panel-heading{
   background: #F1CB00 !important;
 }
@@ -104,6 +110,7 @@ strong{
 .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-primary,
 .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-primary{
   background: #F1CB00 !important;
+  color: #000 !important;
 }
 .label-warning{
 

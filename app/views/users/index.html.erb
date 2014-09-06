@@ -18,7 +18,7 @@
                     <%= form_for :ride, html:{id:"seats"},
                       url:{controller: "rides", action: "update_seats", id: r.id} do |f| %>
                     <%= f.text_field :seats, class: "col-md-4" %>
-                    <div class="pull-right"><%= f.submit "Update", {class: "btn btn-primary"} %></div>
+                    <div class="pull-right"><%= f.submit "Update", {class: "btn btn-depauw"} %></div>
                   <% end %>
                   </td>
                 <% else %>
@@ -55,7 +55,7 @@
   <% current_user.rides.each do |r| %>
   <% if !current_user.pending?(r) %>
   <div class="col-md-4">
-      <div class="panel panel-primary">
+      <div class="panel panel-success">
         <div class="panel-heading"><b><%= r.start %></b> to <b><%= r.destination %></b></div>
         <div class="panel-body">
           <table class="table">
