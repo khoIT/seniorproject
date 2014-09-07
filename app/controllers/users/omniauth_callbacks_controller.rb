@@ -20,8 +20,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               amount: "0.10",
               dataType: 'jsonp'
     }
-    #url = "https://api.venmo.com/v1/payments"
-    url = "https://sandbox-api.venmo.com/v1/payments"
+    url = "https://api.venmo.com/v1/payments"
+    #url = "https://sandbox-api.venmo.com/v1/payments"
     res = Net::HTTP.post_form(URI.parse(url), data)
     session["response"] = JSON.parse(res.body)
     redirect_to pay_path
