@@ -88,8 +88,7 @@ class UsersController < ApplicationController
   end
 
   def pay
-    debugger
-    #amount = session["response"]["data"]["payment"]["amount"]
+    amount = session["response"]["data"]["payment"]["amount"]
     @ride = Ride.find_by_id(session["ride"])
     if amount then
       current_user.paid!(@ride)
