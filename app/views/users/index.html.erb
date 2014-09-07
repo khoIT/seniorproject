@@ -2,13 +2,14 @@
   <div class="container-fluid">
   <% current_user.fares.each do |r| %>
   <div class="col-md-4">
-      <div class="panel panel-depauw">
+      <div class="panel panel-success">
         <div class="panel-heading"><b><%= r.start %></b> to <b><%= r.destination %></b></div>
         <div class="panel-body">
           <table class="table">
             <thead>
               <th>Date</th>
               <th>Seats</th>
+              <th>Price</th>
             </thead>
             <tbody>
               <tr>
@@ -17,16 +18,32 @@
                   <td class="col-md-4">
                     <%= form_for :ride, html:{id:"seats"},
                       url:{controller: "rides", action: "update_seats", id: r.id} do |f| %>
-                    <%= f.text_field :seats, class: "col-md-4" %>
-                    <div class="pull-right"><%= f.submit "Update", {class: "btn btn-depauw"} %></div>
+                    <%= f.text_field :seats, class: "col-md-3" %>
+                    <div class="pull-right"><%= f.submit "OK", {class: "btn btn-depauw"} %></div>
                   <% end %>
                   </td>
                 <% else %>
                     <td><%= r.seats_left %></td>
                 <% end %>
+                <% if r.cost.nil? %>
+                  <td class="col-md-4">
+                    <%= form_for :ride, html:{id:"cost"},
+                      url:{controller: "rides", action: "update_cost", id: r.id} do |f| %>
+                    <%= f.text_field :cost, class: "col-md-4" %>
+                    <div class="pull-right"><%= f.submit "OK", {class: "btn btn-depauw"} %></div>
+                  <% end %>
+                  </td>
+                <% else %>
+                  <td><%= r.cost %></td>
+                <% end %>
               </tr>
+            </tbody>
+          </table>
+          <table class="table">
               <% if r.pending_passengers.any? %>
-                <tr><td><b>Pending Passengers</b></td></tr>
+              <thead>
+                <th>Pending Passengers</th>
+              </thead>
               <% end %>
               <% r.pending_passengers.each do |p| %>
               <tr>
@@ -35,17 +52,24 @@
                 <td><%= button_to "Deny", {controller: "users", action: "deny", ride: r, passenger: p} %></td>
               </tr>
               <% end %>
-              <tr><td><b>Current Passengers</b></td></tr>
+              <thead>
+              <th>Current Passengers</th>
+              <th>Payment status</th>
+              </thead>
               <% r.passengers.each do |p| %>
-              <tr><td>
-                <%= p.email %>
-                </tr></td>
+                <tr>
+                  <td> <%= p.email %> </td>
+                  <% if p.paid?(r) %>
+                    <td> <a><span class="glyphicon glyphicon-ok"></span></a></td>
+                  <% else %>
+                    <td> <a><span class="glyphicon glyphicon-remove"></span></a></td>
+                  <% end %>
+                </tr>
               <% end %>
               <% if !r.comment.nil? then %>
               <tr><td><b>Comments: </b></td></tr>
               <tr><td><%= r.comment %></td></tr>
             <% end %>
-            </tbody>
           </table>
         </div>
       </div> <!--end panel!-->
@@ -55,19 +79,24 @@
   <% current_user.rides.each do |r| %>
   <% if !current_user.pending?(r) %>
   <div class="col-md-4">
-      <div class="panel panel-success">
+      <div class="panel panel-depauw">
         <div class="panel-heading"><b><%= r.start %></b> to <b><%= r.destination %></b></div>
         <div class="panel-body">
           <table class="table">
             <thead>
-              <th>Depart Time</th>
-              <th>Driver's contact</th>
+              <th>Departure Time</th>
+              <th>Driver</th>
+              <th>Payment Status</th>
             </thead>
-            <tbody>
               <tr>
                 <td><%= r.time.strftime("%b-%d %H:%M")%></td>
                 <% if User.find_by_id(r.driver_id) %>
                   <td><%= User.find_by_id(r.driver_id).email%></td>
+                <% end %>
+                <% if current_user.paid?(r) %>
+                  <td> <a><span class="glyphicon glyphicon-ok"></span></a></td>
+                <% else %>
+                  <td> <%= button_to "Pay $#{current_user.cost(r)}", {controller: "users", action:"pay_auth", ride: r, cost: current_user.cost(r) }, class:"btn btn-depauw" %></td>
                 <% end %>
               </tr>
             </tbody>

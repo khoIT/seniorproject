@@ -11,6 +11,7 @@ Rideshare::Application.routes.draw do
   get 'by_start_json', to: 'welcome#by_start_json'
   post 'hop_on', to: 'users#hop_on'
   post 'update_seats', to: 'rides#update_seats'
+  post 'update_cost', to: 'rides#update_cost'
   post 'accept', to: 'users#accept'
   post 'deny', to: 'users#deny'
   post 'jump_off', to: 'users#jump_off'
@@ -19,6 +20,8 @@ Rideshare::Application.routes.draw do
   get 'rides/new', to: 'rides#new', as: :new_ride
   post 'create_ride', to: 'rides#create', as: :create_ride
   post 'users/drive', to: 'users#drive', as: :driver
+  post 'users/payauth', to: 'users#pay_auth'
+  get 'users/pay', to: 'users#pay', as: :pay
   #
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -11,4 +11,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
   end
   alias_method :facebook, :google_oauth2
+
+  def venmo
+    session["devise.venmo"] = request.env["omniauth.auth"]
+    data = {access_token: session["devise.venmo"].credentials.token,
+              email: "khoitran_2014@depauw.edu",
+              note: "testing",
+              amount: "0.10",
+              dataType: 'jsonp'
+    }
+    url = "https://api.venmo.com/v1/payments"
+    #https://sandbox-api.venmo.com/v1/payments
+    res = Net::HTTP.post_form(URI.parse(url), data)
+    session["response"] = JSON.parse(res.body)
+    redirect_to pay_path
+    #render :json => res.body
+  end
 end

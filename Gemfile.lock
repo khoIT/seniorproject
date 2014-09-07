@@ -134,6 +134,9 @@ GEM
       multi_json (~> 1.3)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    omniauth-venmo (1.1.1)
+      omniauth (~> 1.2)
+      omniauth-oauth2 (~> 1.1)
     orm_adapter (0.5.0)
     pg (0.17.1)
     polyglot (0.3.5)
@@ -197,6 +200,8 @@ GEM
       multi_json
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
+    sinatra (1.0)
+      rack (>= 1.0)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -250,8 +255,10 @@ DEPENDENCIES
   jquery-ui-rails (~> 5.0.0)
   less-rails
   momentjs-rails (>= 2.8.1)
+  omniauth
   omniauth-facebook
   omniauth-google-oauth2
+  omniauth-venmo
   pg
   rails (~> 4.0.1)
   rails_12factor
@@ -261,6 +268,7 @@ DEPENDENCIES
   select2-rails
   simple_form (~> 3.0.0.rc)
   simplecov
+  sinatra
   therubyracer
   turbolinks
   twitter-bootstrap-rails

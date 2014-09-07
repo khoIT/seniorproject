@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
+         :omniauthable, :omniauth_providers => [:facebook, :google_oauth2, :venmo]
   has_many :passenger_rides, foreign_key: "passenger_id", dependent: :destroy
   has_many :rides, through: :passenger_rides, class_name: "Ride"
 
@@ -19,6 +19,20 @@ class User < ActiveRecord::Base
 
   def driver?(ride)
       ride.driver_id == self.id
+  end
+
+  def cost(ride)
+    ride.cost.to_f / ride.passengers.count.to_f
+  end
+
+  def paid?(ride)
+    passenger_ride = self.passenger_rides.find_by_ride_id(ride.id)
+    passenger_ride.paid == true
+  end
+
+  def paid!(ride)
+    passenger_ride = self.passenger_rides.find_by_ride_id(ride)
+    passenger_ride.update_attributes!(paid: true)
   end
 
   def drive!(ride)
@@ -52,15 +66,6 @@ class User < ActiveRecord::Base
 
   def is_driver?
     User.where(driver:true).exists?(self)
-  end
-
-  def self.from_omniauth(auth)
-    data = auth.info
-    user = User.where("email = ? AND provider = ? AND uid = ? ",data["email"], auth.provider, auth.info).first
-    unless user
-        user = User.new
-    end
-    user
   end
 
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)

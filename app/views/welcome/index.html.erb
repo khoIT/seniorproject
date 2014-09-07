@@ -7,63 +7,55 @@
     <% end %>
     <table id="rides" class="table">
     <thead>
-      <% if current_user then %>
         <th>Status</th>
-      <% end %>
-      <th>Driver</th>
-      <th>From</th>
-      <th>Destination</th>
-      <% if current_user then %>
+        <th>From</th>
+        <th>Destination</th>
         <th>Departure</th>
-      <% end %>
-      <th>Seats</th>
       <% if current_user then %>
+        <th>Seats</th>
+        <th>Driver</th>
+        <th>Cost ($)</th>
         <th>Action</th>
       <% end %>
     </thead>
     <tbody>
     <% @all_rides.each do |r| %>
       <tr>
-      <% if current_user then %>
       <td class="">
-        <% if r.not_has_driver? || current_user.pending?(r) then %>
+        <% if r.not_has_driver? || r.seats_left == 0  then %>
           <h4><label style="display:inline-block" class="label label-warning">Pending</label></h4>
-        <% elsif r.seats_left == 0 %>
-          <h4><label style="display:inline-block" class="label label-warning">Full</label></h4>
         <% else %>
           <h4><label style="display:inline-block" class="label label-success lable-lg">Active</label></h4>
         <% end %>
       </td>
-      <% end %>
-      <td class=""><%= User.find_by_id(r.driver_id)? User.find_by_id(r.driver_id).name : ""%></td>
       <td class=""><%= r.start %></td>
       <td class=""><%= r.destination %></td>
+      <td class=""><%= r.time.strftime("%b-%d %H:%M") %></td>
       <% if current_user then %>
-        <td class=""><%= r.time.strftime("%b-%d %H:%M") %></td>
-      <% end %>
       <td class=""><%= r.seats_left %></td>
-          <% if current_user then %>
-          <td>
-            <% if current_user.passenger?(r) %>
-              <div style="display:inline-block">
-                <%= button_to "Cancel", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
-              </div>
-            <% elsif current_user.pending?(r) %>
-              <div style="display:inline-block">
-                <%= button_to "Cancel", {controller:'users', action:'cancel', ride: r.id}, {class: 'btn btn-danger'} %>
-              </div>
-            <% elsif !current_user.driver?(r) && r.seats_left != 0 %>
-              <div style="display:inline-block">
-                <%= button_to "Join!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
-              </div>
-            <% end %>
-            <% if current_user.is_driver? && !current_user.passenger?(r) then %>
-                <div style="display:inline-block">
-                  <%= button_to "Drive!", {controller:'users', action:'drive', ride: r.id}, {class: 'btn btn-depauw'} %>
-                </div>
-            <% end %>
-        </td>
+      <td class=""><%= User.find_by_id(r.driver_id)? User.find_by_id(r.driver_id).name : ""%></td>
+      <td class=""><%= r.cost %></td>
+        <td>
+          <% if current_user.passenger?(r) %>
+            <div style="display:inline-block">
+              <%= button_to "Cancel", {controller:'users', action:'jump_off', ride: r.id}, {class: 'btn btn-danger'} %>
+            </div>
+          <% elsif current_user.pending?(r) %>
+            <div style="display:inline-block">
+              <%= button_to "Cancel", {controller:'users', action:'cancel', ride: r.id}, {class: 'btn btn-danger'} %>
+            </div>
+          <% elsif !current_user.driver?(r) && r.seats_left != 0 %>
+            <div style="display:inline-block">
+              <%= button_to "Join!", {controller:'users', action:'hop_on', ride: r.id}, {class: 'btn btn-success'} %>
+            </div>
           <% end %>
+          <% if current_user.is_driver? && !current_user.passenger?(r) then %>
+              <div style="display:inline-block">
+                <%= button_to "Drive!", {controller:'users', action:'drive', ride: r.id}, {class: 'btn btn-depauw'} %>
+              </div>
+          <% end %>
+        </td>
+        <% end %>
     </tr>
     <% end %>
     </tbody>
@@ -79,7 +71,11 @@
       "bAutoWidth": false,
       "dom": '<"toolbar">frtip'
     });
-     $("div.toolbar").html('<b>Hi! We currently have these available rides:</b>');
+    <% if current_user %>
+     $("div.toolbar").html('<b>Hi! We currently have these rides: </b>');
+     <% else %>
+     $("div.toolbar").html('<b>Welcome! You can find and request rides to and from DePauw here. Please login for more information!</b>');
+     <% end %>
   } );
     window.switch = <%= session[:driver] %>
     $('input[name="driver"]').bootstrapSwitch('state', window.switch, true);

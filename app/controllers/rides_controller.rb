@@ -28,6 +28,12 @@ class RidesController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def update_cost
+    ride = Ride.find_by_id(params[:id])
+    ride.update_attributes!(cost: params[:ride][:cost])
+    redirect_to user_path(current_user)
+  end
+
   def list_start
     @start = Ride.all.order(:start).where("start like ?", "%#{params[:term]}%")
     render json: @start

@@ -77,3 +77,6 @@ group :development, :test do
 end
 gem 'datejs-rails'
 gem 'angularjs-rails'
+gem 'omniauth'
+gem 'sinatra'
+gem 'omniauth-venmo'

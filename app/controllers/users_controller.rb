@@ -82,4 +82,17 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def pay_auth
+      session["ride"] = params[:ride]
+      redirect_to user_omniauth_authorize_path(:venmo)
+  end
+
+  def pay
+    amount = session["response"]["data"]["payment"]["amount"]
+    @ride = Ride.find_by_id(session["ride"])
+    if amount == current_user.cost(@ride) then
+      current_user.paid!(@ride)
+    end
+      redirect_to user_path(current_user), notice: "You payment has been completed!"
+  end
 end
