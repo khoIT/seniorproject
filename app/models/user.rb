@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   has_many :fares, foreign_key: "driver_id", class_name: "Ride", inverse_of: :user
 
   scope :driver, -> {where("driver = ?", true)}
-  after_create :send_welcome_email
 
   def passenger?(ride)
     passenger_ride = self.passenger_rides.find_by_ride_id(ride.id)
@@ -78,10 +77,4 @@ class User < ActiveRecord::Base
      end
      user
   end
-
-  private
-
-    def send_welcome_email
-      UserMailer.welcome(self).deliver
-    end
 end

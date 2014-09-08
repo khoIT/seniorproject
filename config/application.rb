@@ -28,5 +28,6 @@ module Rideshare
     config.generators do |g|
       g.test_framework :rspec
     end
+    config.active_record.observers = :user_observer;
   end
 end
