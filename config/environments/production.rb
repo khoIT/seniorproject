@@ -83,8 +83,8 @@ Rideshare::Application.configure do
   domain: ENV["GMAIL_DOMAIN"],
   authentication: "plain",
   enable_starttls_auto: true,
-  user_name: ENV["GMAIL_USERNAME"],
-  password: ENV["GMAIL_PASSWORD"]
+  user_name: ENV["GMAIL_NEW_USERNAME"],
+  password: ENV["GMAIL_NEW_PASSWORD"]
   }
 
 
