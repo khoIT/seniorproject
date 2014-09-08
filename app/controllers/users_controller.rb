@@ -84,7 +84,6 @@ class UsersController < ApplicationController
 
   def pay_auth
       session["ride"] = params[:ride]
-      redirect_to user_omniauth_authorize_path(:venmo)
   end
 
   def pay

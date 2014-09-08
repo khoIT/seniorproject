@@ -19,5 +19,4 @@ class WelcomeController < ApplicationController
     rides_start: Ride.active.group_by {|r| r.start},
     }
   end
-
 end

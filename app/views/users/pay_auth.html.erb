@@ -1,0 +1,14 @@
+<%= render partial: "layouts/header" %>
+<div class="border-form-div">
+  <h3>Payment Methods</h3>
+  <br/>
+  <h5>Hi <%= current_user.name ? current_user.name : current_user.email %>, </h5>
+  <p> You agree to pay $<%= params[:cost] %> for this <%= link_to "ride", user_path(current_user) %>.</p>
+  <p> Please find below the avaiable methods of payment: </p>
+  <table>
+    <tr>
+      <td style="padding-right: 20px"><%= button_to "Venmo", user_omniauth_authorize_url(:venmo), {class: "btn btn-depauw"} %></td>
+      <td><%= button_to "Paypal", user_omniauth_authorize_url(:venmo), {class: "btn btn-primary"} %></td>
+    </tr>
+  </table>
+<%= render partial: "layouts/footer" %>
