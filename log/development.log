@@ -5408,3 +5408,652 @@ Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2014-09-30 20:13:16
 
 
 Started GET "/assets/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2014-09-30 20:13:16 -0400
+  [1m[36m (2.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.6ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateMicroposts (20140821055807)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (5.2ms)[0m  [1mCREATE TABLE "rides" ("id" serial primary key, "start" character varying(255), "destination" character varying(255), "time" timestamp, "seats_left" integer, "driver_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (1.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821055807"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePassengerRides (20140821055833)
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (3.3ms)[0m  [1mCREATE TABLE "passenger_rides" ("id" serial primary key, "ride_id" integer, "passenger_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821055833"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20140821064818)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (4.8ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying(255), "last_sign_in_ip" character varying(255)) [0m
+  [1m[35m (1.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821064818"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddNameUser (20140821065210)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD COLUMN "name" character varying(255)[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821065210"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to AddPendingToPassengerRides (20140823192250)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "passenger_rides" ADD COLUMN "confirmed" boolean[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "passenger_rides" ADD COLUMN "paid" boolean
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140823192250"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Migrating to AdDDriverToUser (20140827131855)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD COLUMN "driver" boolean
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140827131855"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Migrating to AddCommentToRide (20140828051933)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "rides" ADD COLUMN "comment" text
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140828051933"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+Migrating to AddOmniauthToUsers (20140828220928)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD COLUMN "provider" character varying(255)
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD COLUMN "uid" character varying(255)[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140828220928"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Migrating to AddSessionsTable (20140829044408)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (3.9ms)[0m  [1mCREATE TABLE "sessions" ("id" serial primary key, "session_id" character varying(255) NOT NULL, "data" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (0.8ms)[0m  CREATE UNIQUE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")
+  [1m[36m (1.1ms)[0m  [1mCREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140829044408"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddMoneyToRides (20140907060633)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "rides" ADD COLUMN "cost" integer[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140907060633"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to AddConfirmableToDevise (20140908145458)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD COLUMN "confirmation_token" character varying(255)[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD COLUMN "confirmed_at" timestamp
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD COLUMN "confirmation_sent_at" timestamp[0m
+  [1m[35m (1.0ms)[0m  CREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token")
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE "users" SET "confirmed_at" = '2014-10-01 00:20:37.885946'[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140908145458"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (1.4ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'khoitran_2014@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (8.2ms)[0m  INSERT INTO "users" ("confirmed_at", "driver", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:20:40 UTC +00:00], ["driver", true], ["email", "khoitran_2014@depauw.edu"], ["encrypted_password", "$2a$10$O/7qNREY7n86s1X13s4KCOxbZP.VK/E3uS5UMZ2K78m1jUIIdO0xW"], ["name", "Khoi"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (3.4ms)
+
+Sent mail to khoitran_2014@depauw.edu (394.4ms)
+Date: Tue, 30 Sep 2014 20:20:41 -0400
+From: khoitran_2014@depauw.edu
+To: khoitran_2014@depauw.edu
+Message-ID: <542b48d9b21d6_ad343fcff145e6dc162ae@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, khoitran_2014@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (1.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'annasmith_2015@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "users" ("confirmed_at", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:20:42 UTC +00:00], ["email", "annasmith_2015@depauw.edu"], ["encrypted_password", "$2a$10$jL/xQLrBOOsJSn/FUeRVwOfJsVsPxeaiMRrBiYyyxn71nzNX1Bl8."], ["name", "Anna"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (0.1ms)
+
+Sent mail to annasmith_2015@depauw.edu (333.8ms)
+Date: Tue, 30 Sep 2014 20:20:42 -0400
+From: khoitran_2014@depauw.edu
+To: annasmith_2015@depauw.edu
+Message-ID: <542b48da36996_ad343fcff145e6dc1634a@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, annasmith_2015@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.8ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'jackallen_2016@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "users" ("confirmed_at", "driver", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:20:42 UTC +00:00], ["driver", true], ["email", "jackallen_2016@depauw.edu"], ["encrypted_password", "$2a$10$PoHnf6PoVmYQRlvAdSaC8ucjftntRkzIWePchbsFODxyCKsdnZz7."], ["name", "Jack"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (0.1ms)
+
+Sent mail to jackallen_2016@depauw.edu (333.3ms)
+Date: Tue, 30 Sep 2014 20:20:42 -0400
+From: khoitran_2014@depauw.edu
+To: jackallen_2016@depauw.edu
+Message-ID: <542b48da9f95c_ad343fcff145e6dc16491@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, jackallen_2016@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'ameliachan_2017@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("confirmed_at", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:20:42 UTC +00:00], ["email", "ameliachan_2017@depauw.edu"], ["encrypted_password", "$2a$10$FBly5HXr/z3omtcEEdesS.Njys0bfJSxkA2ihYBS5OCFuJSS4mTeu"], ["name", "Amelia"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (0.1ms)
+
+Sent mail to ameliachan_2017@depauw.edu (346.1ms)
+Date: Tue, 30 Sep 2014 20:20:43 -0400
+From: khoitran_2014@depauw.edu
+To: ameliachan_2017@depauw.edu
+Message-ID: <542b48db133e3_ad343fcff145e6dc1651@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, ameliachan_2017@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (1.3ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'khoitran_2014@depauw.edu' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'annasmith_2015@depauw.edu' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.8ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'jackallen_2016@depauw.edu' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'ameliachan_2017@depauw.edu' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36m (3.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (1.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateMicroposts (20140821055807)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (5.3ms)[0m  [1mCREATE TABLE "rides" ("id" serial primary key, "start" character varying(255), "destination" character varying(255), "time" timestamp, "seats_left" integer, "driver_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (1.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821055807"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePassengerRides (20140821055833)
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (5.1ms)[0m  [1mCREATE TABLE "passenger_rides" ("id" serial primary key, "ride_id" integer, "passenger_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821055833"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20140821064818)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (4.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying(255), "last_sign_in_ip" character varying(255)) [0m
+  [1m[35m (1.1ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821064818"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddNameUser (20140821065210)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "users" ADD COLUMN "name" character varying(255)[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821065210"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to AddPendingToPassengerRides (20140823192250)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "passenger_rides" ADD COLUMN "confirmed" boolean[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "passenger_rides" ADD COLUMN "paid" boolean
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140823192250"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+Migrating to AdDDriverToUser (20140827131855)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD COLUMN "driver" boolean
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140827131855"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+Migrating to AddCommentToRide (20140828051933)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "rides" ADD COLUMN "comment" text
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140828051933"]]
+  [1m[35m (0.2ms)[0m  COMMIT
+Migrating to AddOmniauthToUsers (20140828220928)
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD COLUMN "provider" character varying(255)
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD COLUMN "uid" character varying(255)[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140828220928"]]
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Migrating to AddSessionsTable (20140829044408)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (3.7ms)[0m  [1mCREATE TABLE "sessions" ("id" serial primary key, "session_id" character varying(255) NOT NULL, "data" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.0ms)[0m  CREATE UNIQUE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")
+  [1m[36m (1.3ms)[0m  [1mCREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140829044408"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddMoneyToRides (20140907060633)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "rides" ADD COLUMN "cost" integer[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140907060633"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to AddConfirmableToDevise (20140908145458)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD COLUMN "confirmation_token" character varying(255)[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD COLUMN "confirmed_at" timestamp
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD COLUMN "confirmation_sent_at" timestamp[0m
+  [1m[35m (1.3ms)[0m  CREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token")
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE "users" SET "confirmed_at" = '2014-10-01 00:21:49.392538'[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140908145458"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to ModifyTimeRide (20140919031906)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "rides" RENAME COLUMN "time" TO "start_time"[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "rides" ADD COLUMN "end_time" timestamp
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140919031906"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (1.3ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'khoitran_2014@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (8.1ms)[0m  INSERT INTO "users" ("confirmed_at", "driver", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:21:52 UTC +00:00], ["driver", true], ["email", "khoitran_2014@depauw.edu"], ["encrypted_password", "$2a$10$IzEs.7Oe55N/JJUqho8imOhUepAOBG4qwz2G4l0vKVJWDDb2FZU8a"], ["name", "Khoi"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (1.4ms)
+
+Sent mail to khoitran_2014@depauw.edu (380.3ms)
+Date: Tue, 30 Sep 2014 20:21:53 -0400
+From: khoitran_2014@depauw.edu
+To: khoitran_2014@depauw.edu
+Message-ID: <542b492132e62_ad7b3fc16205e6d8237c0@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, khoitran_2014@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (1.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.6ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'annasmith_2015@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "users" ("confirmed_at", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:21:53 UTC +00:00], ["email", "annasmith_2015@depauw.edu"], ["encrypted_password", "$2a$10$eBM9xRj1yOAtvAZMkv1xCub6bJ072tfRz43t.0Rsc6BHd/3iqzf/K"], ["name", "Anna"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (0.1ms)
+
+Sent mail to annasmith_2015@depauw.edu (324.5ms)
+Date: Tue, 30 Sep 2014 20:21:53 -0400
+From: khoitran_2014@depauw.edu
+To: annasmith_2015@depauw.edu
+Message-ID: <542b4921a8ae3_ad7b3fc16205e6d8238d7@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, annasmith_2015@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'jackallen_2016@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("confirmed_at", "driver", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:21:54 UTC +00:00], ["driver", true], ["email", "jackallen_2016@depauw.edu"], ["encrypted_password", "$2a$10$WhEMu0SpLFGMQ8aEOhCNEul/FvL4B3gakMoZYHE9SWW91mAS1AVsC"], ["name", "Jack"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (0.1ms)
+
+Sent mail to jackallen_2016@depauw.edu (327.0ms)
+Date: Tue, 30 Sep 2014 20:21:54 -0400
+From: khoitran_2014@depauw.edu
+To: jackallen_2016@depauw.edu
+Message-ID: <542b49221b7a3_ad7b3fc16205e6d8239e1@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, jackallen_2016@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (1.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'ameliachan_2017@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("confirmed_at", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:21:54 UTC +00:00], ["email", "ameliachan_2017@depauw.edu"], ["encrypted_password", "$2a$10$QiFRtTTIYb.YEzi/hz/JZOrFtme8A9y/k70tLiMeAbeL4/EhsXSN."], ["name", "Amelia"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (0.1ms)
+
+Sent mail to ameliachan_2017@depauw.edu (316.5ms)
+Date: Tue, 30 Sep 2014 20:21:54 -0400
+From: khoitran_2014@depauw.edu
+To: ameliachan_2017@depauw.edu
+Message-ID: <542b4922830e3_ad7b3fc16205e6d824050@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, ameliachan_2017@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36mRide Load (1.0ms)[0m  [1mSELECT "rides".* FROM "rides" ORDER BY "rides"."id" ASC LIMIT 1[0m
+  [1m[35mRide Load (1.2ms)[0m  SELECT "rides".* FROM "rides"
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (1.3ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'khoitran_2014@depauw.edu' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'annasmith_2015@depauw.edu' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'jackallen_2016@depauw.edu' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.8ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'ameliachan_2017@depauw.edu' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (1.5ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'khoitran_2014@depauw.edu' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.8ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'annasmith_2015@depauw.edu' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.8ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'jackallen_2016@depauw.edu' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.5ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'ameliachan_2017@depauw.edu' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (6.3ms)[0m  [1mINSERT INTO "rides" ("cost", "created_at", "destination", "end_time", "seats_left", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["cost", 75], ["created_at", Wed, 01 Oct 2014 00:27:41 UTC +00:00], ["destination", "Chicago"], ["end_time", Tue, 23 Sep 2014 02:35:00 UTC +00:00], ["seats_left", 3], ["start", "DePauw"], ["start_time", Mon, 22 Sep 2014 02:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:27:41 UTC +00:00]]
+  [1m[35m (1.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "rides" ("cost", "created_at", "destination", "end_time", "seats_left", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["cost", 25], ["created_at", Wed, 01 Oct 2014 00:27:41 UTC +00:00], ["destination", "Indy"], ["end_time", Fri, 31 Oct 2014 02:35:00 UTC +00:00], ["seats_left", 2], ["start", "DePauw"], ["start_time", Thu, 30 Oct 2014 02:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:27:41 UTC +00:00]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "rides" ("cost", "created_at", "destination", "end_time", "seats_left", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["cost", 30], ["created_at", Wed, 01 Oct 2014 00:27:41 UTC +00:00], ["destination", "DePauw"], ["end_time", Sat, 21 Mar 2015 02:35:00 UTC +00:00], ["seats_left", 3], ["start", "Louisville"], ["start_time", Fri, 20 Mar 2015 02:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:27:41 UTC +00:00]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "rides" ("created_at", "destination", "end_time", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Wed, 01 Oct 2014 00:27:41 UTC +00:00], ["destination", "Walmart"], ["end_time", Tue, 11 Nov 2014 03:35:00 UTC +00:00], ["start", "DePauw"], ["start_time", Mon, 10 Nov 2014 03:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:27:41 UTC +00:00]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (1.4ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'khoitran_2014@depauw.edu' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'annasmith_2015@depauw.edu' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'jackallen_2016@depauw.edu' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'ameliachan_2017@depauw.edu' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (6.7ms)[0m  [1mINSERT INTO "rides" ("cost", "created_at", "destination", "end_time", "seats_left", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["cost", 75], ["created_at", Wed, 01 Oct 2014 00:28:08 UTC +00:00], ["destination", "Chicago"], ["end_time", Tue, 23 Sep 2014 02:35:00 UTC +00:00], ["seats_left", 3], ["start", "DePauw"], ["start_time", Mon, 22 Sep 2014 02:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:28:08 UTC +00:00]]
+  [1m[35m (0.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "rides" ("cost", "created_at", "destination", "end_time", "seats_left", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["cost", 25], ["created_at", Wed, 01 Oct 2014 00:28:08 UTC +00:00], ["destination", "Indy"], ["end_time", Fri, 31 Oct 2014 02:35:00 UTC +00:00], ["seats_left", 2], ["start", "DePauw"], ["start_time", Thu, 30 Oct 2014 02:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:28:08 UTC +00:00]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "rides" ("cost", "created_at", "destination", "end_time", "seats_left", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["cost", 30], ["created_at", Wed, 01 Oct 2014 00:28:08 UTC +00:00], ["destination", "DePauw"], ["end_time", Sat, 21 Mar 2015 02:35:00 UTC +00:00], ["seats_left", 3], ["start", "Louisville"], ["start_time", Fri, 20 Mar 2015 02:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:28:08 UTC +00:00]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "rides" ("created_at", "destination", "end_time", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Wed, 01 Oct 2014 00:28:08 UTC +00:00], ["destination", "Walmart"], ["end_time", Tue, 11 Nov 2014 03:35:00 UTC +00:00], ["start", "DePauw"], ["start_time", Mon, 10 Nov 2014 03:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:28:08 UTC +00:00]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[36m (3.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (2.5ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateMicroposts (20140821055807)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (8.6ms)[0m  [1mCREATE TABLE "rides" ("id" serial primary key, "start" character varying(255), "destination" character varying(255), "time" timestamp, "seats_left" integer, "driver_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (1.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821055807"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreatePassengerRides (20140821055833)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (4.8ms)[0m  [1mCREATE TABLE "passenger_rides" ("id" serial primary key, "ride_id" integer, "passenger_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821055833"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20140821064818)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (7.8ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" character varying(255), "last_sign_in_ip" character varying(255)) [0m
+  [1m[35m (1.9ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (1.9ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821064818"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddNameUser (20140821065210)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "users" ADD COLUMN "name" character varying(255)[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140821065210"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddPendingToPassengerRides (20140823192250)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "passenger_rides" ADD COLUMN "confirmed" boolean[0m
+  [1m[35m (0.5ms)[0m  ALTER TABLE "passenger_rides" ADD COLUMN "paid" boolean
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140823192250"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to AdDDriverToUser (20140827131855)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "users" ADD COLUMN "driver" boolean
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140827131855"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to AddCommentToRide (20140828051933)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "rides" ADD COLUMN "comment" text
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140828051933"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+Migrating to AddOmniauthToUsers (20140828220928)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "users" ADD COLUMN "provider" character varying(255)
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD COLUMN "uid" character varying(255)[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140828220928"]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Migrating to AddSessionsTable (20140829044408)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (6.0ms)[0m  [1mCREATE TABLE "sessions" ("id" serial primary key, "session_id" character varying(255) NOT NULL, "data" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.5ms)[0m  CREATE UNIQUE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id")
+  [1m[36m (1.7ms)[0m  [1mCREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at")[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140829044408"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddMoneyToRides (20140907060633)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (1.0ms)[0m  [1mALTER TABLE "rides" ADD COLUMN "cost" integer[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140907060633"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to AddConfirmableToDevise (20140908145458)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.8ms)[0m  [1mALTER TABLE "users" ADD COLUMN "confirmation_token" character varying(255)[0m
+  [1m[35m (0.4ms)[0m  ALTER TABLE "users" ADD COLUMN "confirmed_at" timestamp
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "users" ADD COLUMN "confirmation_sent_at" timestamp[0m
+  [1m[35m (1.6ms)[0m  CREATE UNIQUE INDEX "index_users_on_confirmation_token" ON "users" ("confirmation_token")
+  [1m[36mSQL (1.1ms)[0m  [1mUPDATE "users" SET "confirmed_at" = '2014-10-01 00:29:54.334191'[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140908145458"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to ModifyTimeRide (20140919031906)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "rides" RENAME COLUMN "time" TO "start_time"[0m
+  [1m[35m (0.7ms)[0m  ALTER TABLE "rides" ADD COLUMN "end_time" timestamp
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140919031906"]]
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (1.4ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'khoitran_2014@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (8.5ms)[0m  INSERT INTO "users" ("confirmed_at", "driver", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:30:00 UTC +00:00], ["driver", true], ["email", "khoitran_2014@depauw.edu"], ["encrypted_password", "$2a$10$k0LeJielRXmwlsrL8lMJpeyct6hZv2B4W9Uz0JIPBr9ZdxCpHz.Pi"], ["name", "Khoi"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (1.5ms)
+
+Sent mail to khoitran_2014@depauw.edu (378.0ms)
+Date: Tue, 30 Sep 2014 20:30:01 -0400
+From: khoitran_2014@depauw.edu
+To: khoitran_2014@depauw.edu
+Message-ID: <542b4b096211d_ae6e3fff7985e6d0705a1@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, khoitran_2014@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (1.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (1.0ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'annasmith_2015@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (1.0ms)[0m  INSERT INTO "users" ("confirmed_at", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:30:01 UTC +00:00], ["email", "annasmith_2015@depauw.edu"], ["encrypted_password", "$2a$10$zWsCLjQdLRpw40Q.tgO1kukMUFx47nhjeiE5eAeHIcC/0IvaNRIIC"], ["name", "Anna"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (0.1ms)
+
+Sent mail to annasmith_2015@depauw.edu (331.8ms)
+Date: Tue, 30 Sep 2014 20:30:01 -0400
+From: khoitran_2014@depauw.edu
+To: annasmith_2015@depauw.edu
+Message-ID: <542b4b09d6416_ae6e3fff7985e6d0706ee@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, annasmith_2015@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.7ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'jackallen_2016@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "users" ("confirmed_at", "driver", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:30:02 UTC +00:00], ["driver", true], ["email", "jackallen_2016@depauw.edu"], ["encrypted_password", "$2a$10$0iUiHi0La4oN45szz89uXeg538CF02Lp0rzPDCZhwFXtZRJCtRrpS"], ["name", "Jack"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (0.1ms)
+
+Sent mail to jackallen_2016@depauw.edu (326.9ms)
+Date: Tue, 30 Sep 2014 20:30:02 -0400
+From: khoitran_2014@depauw.edu
+To: jackallen_2016@depauw.edu
+Message-ID: <542b4b0a4afc6_ae6e3fff7985e6d070753@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, jackallen_2016@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (1.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'ameliachan_2017@depauw.edu' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("confirmed_at", "email", "encrypted_password", "name") VALUES ($1, $2, $3, $4) RETURNING "id"  [["confirmed_at", Wed, 01 Oct 2014 00:30:02 UTC +00:00], ["email", "ameliachan_2017@depauw.edu"], ["encrypted_password", "$2a$10$84huqRHPUomjRTVKPn/SyOwiP08tudaEwwwggqRHiQeGXVl4a5VD."], ["name", "Amelia"]]
+User password confirmed!
+  Rendered user_mailer/welcome.html.erb (0.1ms)
+
+Sent mail to ameliachan_2017@depauw.edu (329.4ms)
+Date: Tue, 30 Sep 2014 20:30:02 -0400
+From: khoitran_2014@depauw.edu
+To: ameliachan_2017@depauw.edu
+Message-ID: <542b4b0ab2471_ae6e3fff7985e6d070895@Khois-MacBook-Pro-2.local.mail>
+Subject: Welcome to DePauw Rides
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<p> Welcome to DePauw Rides, ameliachan_2017@depauw.edu</p>
+
+<p> Thank you for signing up. I hope you will enjoy the rides and find more interesting people at DePauw! </p>
+<p> Please don't hesitate to request rides and let me know if you have any question! </p>
+<p> Best, </p>
+<p> Khoi </p>
+
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "rides" ("cost", "created_at", "destination", "end_time", "seats_left", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["cost", 75], ["created_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00], ["destination", "Chicago"], ["end_time", Tue, 23 Sep 2014 02:35:00 UTC +00:00], ["seats_left", 3], ["start", "DePauw"], ["start_time", Mon, 22 Sep 2014 02:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rides" ("cost", "created_at", "destination", "end_time", "seats_left", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"  [["cost", 25], ["created_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00], ["destination", "Indy"], ["end_time", Fri, 31 Oct 2014 02:35:00 UTC +00:00], ["seats_left", 2], ["start", "DePauw"], ["start_time", Thu, 30 Oct 2014 02:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "rides" ("cost", "created_at", "destination", "end_time", "seats_left", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["cost", 30], ["created_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00], ["destination", "DePauw"], ["end_time", Sat, 21 Mar 2015 02:35:00 UTC +00:00], ["seats_left", 3], ["start", "Louisville"], ["start_time", Fri, 20 Mar 2015 02:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rides" ("created_at", "destination", "end_time", "start", "start_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"  [["created_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00], ["destination", "Walmart"], ["end_time", Tue, 11 Nov 2014 03:35:00 UTC +00:00], ["start", "DePauw"], ["start_time", Mon, 10 Nov 2014 03:35:00 UTC +00:00], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.9ms)[0m  [1mUPDATE "rides" SET "driver_id" = $1, "updated_at" = $2 WHERE "rides"."id" = 1[0m  [["driver_id", 1], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[35mSQL (0.9ms)[0m  UPDATE "rides" SET "driver_id" = $1, "updated_at" = $2 WHERE "rides"."id" = 2  [["driver_id", 1], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE "rides" SET "driver_id" = $1, "updated_at" = $2 WHERE "rides"."id" = 3[0m  [["driver_id", 1], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "passenger_rides" ("created_at", "passenger_id", "ride_id", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00], ["passenger_id", 2], ["ride_id", 1], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mPassengerRide Load (0.6ms)[0m  SELECT "passenger_rides".* FROM "passenger_rides" WHERE "passenger_rides"."passenger_id" = $1 AND "passenger_rides"."ride_id" = 1 LIMIT 1  [["passenger_id", 2]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "passenger_rides" SET "confirmed" = $1, "updated_at" = $2 WHERE "passenger_rides"."id" = 1  [["confirmed", false], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mPassengerRide Load (0.5ms)[0m  SELECT "passenger_rides".* FROM "passenger_rides" WHERE "passenger_rides"."ride_id" = $1 AND "passenger_rides"."passenger_id" = 2 LIMIT 1  [["ride_id", 1]]
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "passenger_rides" SET "confirmed" = $1, "updated_at" = $2 WHERE "passenger_rides"."id" = 1  [["confirmed", true], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "rides" SET "seats_left" = $1, "updated_at" = $2 WHERE "rides"."id" = 1[0m  [["seats_left", 2], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "passenger_rides" ("created_at", "passenger_id", "ride_id", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["created_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00], ["passenger_id", 3], ["ride_id", 1], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPassengerRide Load (0.3ms)[0m  SELECT "passenger_rides".* FROM "passenger_rides" WHERE "passenger_rides"."passenger_id" = $1 AND "passenger_rides"."ride_id" = 1 LIMIT 1  [["passenger_id", 3]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE "passenger_rides" SET "confirmed" = $1, "updated_at" = $2 WHERE "passenger_rides"."id" = 2  [["confirmed", false], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mPassengerRide Load (0.4ms)[0m  SELECT "passenger_rides".* FROM "passenger_rides" WHERE "passenger_rides"."ride_id" = $1 AND "passenger_rides"."passenger_id" = 3 LIMIT 1  [["ride_id", 1]]
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "passenger_rides" SET "confirmed" = $1, "updated_at" = $2 WHERE "passenger_rides"."id" = 2  [["confirmed", true], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mUPDATE "rides" SET "seats_left" = $1, "updated_at" = $2 WHERE "rides"."id" = 1[0m  [["seats_left", 1], ["updated_at", Wed, 01 Oct 2014 00:30:03 UTC +00:00]]
+  [1m[35m (0.3ms)[0m  COMMIT
