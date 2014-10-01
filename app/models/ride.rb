@@ -5,7 +5,7 @@ class Ride < ActiveRecord::Base
 
    belongs_to :user, inverse_of: :rides
 
-   scope :current, -> {where("time >= ?", Time.now)}
+   scope :current, -> {where("end_time >= ?", Time.now)}
    scope :active, -> {where("seats_left > ?", 0)}
 
    #return pending_passengers of this ride

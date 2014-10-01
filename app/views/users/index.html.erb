@@ -13,7 +13,7 @@
             </thead>
             <tbody>
               <tr>
-                <td><%= r.time.strftime("%b-%d %H:%M") %></td>
+                <td><%= r.start_time.strftime("%b-%d %H:%M") %></td>
                 <% if r.seats_left.nil? %>
                   <td class="col-md-4">
                     <%= form_for :ride, html:{id:"seats"},
@@ -89,7 +89,7 @@
               <th>Payment Status</th>
             </thead>
               <tr>
-                <td><%= r.time.strftime("%b-%d %H:%M")%></td>
+                <td><%= r.start_time.strftime("%b-%d %H:%M")%></td>
                 <% if User.find_by_id(r.driver_id) %>
                   <td><%= User.find_by_id(r.driver_id).email%></td>
                 <% end %>

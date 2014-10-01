@@ -98,7 +98,7 @@ strong{
 .panel-depauw{
   margin-top: 10px;
   border-color: #F1CB00 !important;
-  margin-bottom: 20px;
+  margin-bottom: 80px !important;
 }
 .panel-success > .panel-heading{
   background: #d6e9c6 !important;
@@ -106,7 +106,7 @@ strong{
 .panel-success {
   margin-top: 10px;
   border-color: #d6e9c6 !important;
-  margin-bottom: 20px;
+  margin-bottom: 80px !important;
 }
 .alert-success{
   background: #F1CB00 !important;
