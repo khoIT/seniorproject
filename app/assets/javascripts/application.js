@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require private_pub
 //= require jquery_ujs
 //= require jquery-ui
 //= require_tree ./app

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :rides, through: :passenger_rides, class_name: "Ride"
 
   has_many :fares, foreign_key: "driver_id", class_name: "Ride", inverse_of: :user
+  has_many :messages
 
   scope :driver, -> {where("driver = ?", true)}
 

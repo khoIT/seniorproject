@@ -3,30 +3,45 @@
 <div class="col-xs-9 col-sm-6 col-sm-offset-3">
   <h2>Request a Ride</h2>
   <%= form_for :ride, url:{action: "create"} do |f| %>
-  <div class="col-xs-9 col-sm-6">
-    <div><h4>Start</h4>
-    <%= f.text_field :ride_start, id: "start", data: {autocomplete_source:
-                                         Ride.list_start }%></div><br />
+    <div class="panel panel-depauw">
+      <div class="panel-body">
+      <div class="col-xs-9 col-sm-6">
+        <div><h4>Start</h4>
+        <%= f.text_field :ride_start, id: "start", data: {autocomplete_source:
+                                             Ride.list_start }%></div><br />
 
-    <div><h4> Destination </h4>
-    <%= f.text_field :destination, id: "destination", data: {autocomplete_source:
-                                         Ride.list_destination }%></div><br />
- </div>
-  <div class="col-xs-9 col-sm-6">
-    <h4> Departure Time </h4>
-    <div class="form-group">
-    <div class="input-group date" id="datetimepicker1">
-      <div style="display:inline-block"><%= f.text_field :time, id: "time", class:"form-control", style:"display:inline-block" %></div>
-      <div style="display:inline-block"> <a><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-      </span> </a>
-    </div>
+        <div><h4> Destination </h4>
+        <%= f.text_field :destination, id: "destination", data: {autocomplete_source:
+                                             Ride.list_destination }%></div><br />
+      </div>
+
+        <div class="col-xs-9 col-sm-6">
+          <h4> Departure Start Time </h4>
+          <div class="form-group">
+            <div class="input-group date" id="datetimepicker1">
+              <div style="display:inline-block"><%= f.text_field :start_time, id: "start_time", class:"form-control", style:"display:inline-block" %></div>
+              <div style="display:inline-block"><a><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></a> </div>
+            </div>
+          </div>
+
+          <h4> Departure End Time </h4>
+          <div class="form-group">
+            <div class="input-group date" id="datetimepicker2">
+              <div style="display:inline-block"><%= f.text_field :end_time, id: "end_time", class:"form-control", style:"display:inline-block" %></div>
+              <div style="display:inline-block"> <a><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+              </span> </a>
+            </div>
+          </div>
+
+          <div>
+            <h4> Comment </h4>
+            <%= f.text_area :comment, id: "comment"%>
+          </div><br />
+          <%= f.submit "Request", {class: "btn btn-depauw"} %>
+
+      </div>
     </div>
   </div>
-    <div><h4> Comment </h4>
-    <%= f.text_area :comment, id: "comment"%></div><br />
-  <div class="col-xs-9 col-sm-6"><%= f.submit "Request", {class: "btn btn-depauw"} %></div>
-
- </div>
   <% end %>
 </div>
 <%= render partial: "layouts/footer" %>
@@ -34,27 +49,29 @@
 <script type="text/javascript">
   $(function () {
       $('#datetimepicker1').datetimepicker();
+      $('#datetimepicker2').datetimepicker();
   });
   $('#start').autocomplete({
-      source: $('#start').data('autocomplete-source')
+    source: $('#start').data('autocomplete-source')
   });
   $('#destination').autocomplete({
       source: $('#destination').data('autocomplete-source')
   });
   $('form').submit(function(){
-    var day = new Date($('#time').val().toString()).getDate();
+    var start_day = new Date($('#start_time').val().toString()).getDate();
+    var end_day  = new Date($('#end_time').val().toString()).getDate();
     var today = new Date().getDate();
     var start = $('#start').val()
     var destination = $('#destination').val()
-    if (day == today){
+    if (start_day == today || end_day == today){
       alert("Your requested time is too near! Please allow 24 hours for responses");
       event.preventDefault();
     }
-    if (!start.trim()){
+    else if (!start.trim()){  //only return alert once
     alert("You haven't selected a starting place");
     event.preventDefault();
     }
-    if (!destination.trim()){
+    else if (!destination.trim()){
     alert("You haven't selected a destination");
     event.preventDefault();
     }

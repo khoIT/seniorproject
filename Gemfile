@@ -11,7 +11,7 @@ group :production, :staging do
 end
 group :development, :test do
     gem 'rspec-rails', '~> 3.0.0'
-    gem 'debugger'
+    gem 'byebug', '~> 3.5.1'
 end
 
 # Use SCSS for stylesheets
@@ -83,3 +83,5 @@ gem 'omniauth-venmo'
 gem 'rails-observers'
 gem 'rails-perftest'
 gem 'ruby-prof'
+gem 'thin'
+gem 'private_pub'

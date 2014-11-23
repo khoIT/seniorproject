@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 u1 = User.create(name: 'Khoi', password:'123!@#ab', email: 'khoitran_2014@depauw.edu', driver: true, confirmed_at: Time.now)
-u2 = User.create(name: 'Anna', password:'123!@#ab', email: 'annasmith_2015@depauw.edu', confirmed_at: Time.now)
+u2 = User.create(name: 'Anna', password:'123!@#ab', email: 'emails.khoi@gmail.com', confirmed_at: Time.now)
 u3 = User.create(name: 'Jack', password:'123!@#ab', email: 'jackallen_2016@depauw.edu', driver: true, confirmed_at: Time.now)
 u4 = User.create(name: 'Amelia', password:'123!@#ab', email: 'ameliachan_2017@depauw.edu', confirmed_at: Time.now)
 r1 = Ride.create(start: 'DePauw', destination: 'Chicago', start_time: Time.new(2014, 9, 21, 22, 35, 0), end_time: Time.new(2014, 9, 22, 22, 35, 0), seats_left: 3, cost: 75)

@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @ride = Ride.find_by_id(params[:ride])
     current_user.hop_on!(@ride)
     @driver = User.find_by_id(@ride.driver_id)
+    byebug
     UserMailer.passenger_request(@driver, current_user).deliver
     if session[:request]
       (session[:request]).destroy

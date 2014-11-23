@@ -1,0 +1,14 @@
+<h1> Chat Box</h1>
+<div class="chat_container">
+  <ul id="chat">
+    <%= render @messages %>
+  </ul>
+</div>
+
+<%= form_for(Message.new, remote: true) do |f| %>
+  <%= f.text_field :content %>
+  <%= f.submit "Send" %>
+<% end %>
+
+<%= subscribe_to "/messages/new" %>
+

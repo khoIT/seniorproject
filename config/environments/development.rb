@@ -19,7 +19,7 @@ Rideshare::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -41,7 +41,7 @@ Rideshare::Application.configure do
   domain: ENV["GMAIL_DOMAIN"],
   authentication: "plain",
   enable_starttls_auto: true,
-  user_name: ENV["GMAIL_USERNAME"],
-  password: ENV["GMAIL_PASSWORD"]
+  user_name: 'khoitran_2014@depauw.edu',
+  password: 'd3t3rmination'
   }
 end

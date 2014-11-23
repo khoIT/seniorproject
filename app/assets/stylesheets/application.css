@@ -137,7 +137,7 @@ h4{
       width: 100% !important;
     }
 .container{
-  width: 80% !important;
+  width: 90% !important;
   display: block !important;
 }
 .toolbar{
@@ -154,4 +154,7 @@ h4{
 }
 .dataTables_scroll{
   margin-bottom: 20px;
+}
+.chat_container{
+  background: #aaa !important;
 }

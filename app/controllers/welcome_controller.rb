@@ -5,6 +5,8 @@ class WelcomeController < ApplicationController
     else
       @all_rides = Ride.current
     end
+    #include chatbox to frontpage
+    @messages = Message.all
   end
 
   def by_start
