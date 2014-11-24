@@ -11,19 +11,17 @@
 // about supported directives.
 //
 //= require jquery
-//= require private_pub
 //= require jquery_ujs
 //= require jquery-ui
-//= require_tree ./app
-//= require dataTables/jquery.dataTables
-//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require twitter/bootstrap
-//= require turbolinks
+//= require angular
+//= require angular-route
 //= require bootstrap
 //= require underscore-min
 //= require select2
-//= require bootstrap-switch
 //= require moment
 //= require bootstrap-datetimepicker
 //= require date
-//= require angular
+//= require_tree .
+//= require dataTables/jquery.dataTables
+//= require bootstrap-switch
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap

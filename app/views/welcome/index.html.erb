@@ -3,16 +3,13 @@
 
   <!--chat box -->
   <% if current_user then %>
-    <div class="col-md-3">
-      <div class="container">
-        <h3>ChatBox</h3>
-        <%= render template: "messages/chat" %>
-      </div>
+    <div class="col-md-4">      
+        <%= render "chat" %>
     </div>
   <% end %>
 
   <!-- Table -->
-  <div class="col-md-9">
+  <div class="col-md-8">
   <div class="container content">
     <% if current_user then %>
     <input type="checkbox" name="driver" checked>
