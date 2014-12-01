@@ -1,6 +1,8 @@
 Rideshare::Application.routes.draw do
 
   resources :messages
+  resources :rides
+  
   devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"},
                     path_names: {sign_in: "login", sign_out: "logout"}
   # The priority is based upon order of creation: first created -> highest priority.
@@ -19,7 +21,6 @@ Rideshare::Application.routes.draw do
   post 'jump_off', to: 'users#jump_off'
   post 'cancel', to: 'users#cancel'
   get 'rides/list_start', to: 'rides#list_start', as: :list_start
-  get 'rides/new', to: 'rides#new', as: :new_ride
   post 'create_ride', to: 'rides#create', as: :create_ride
   post 'users/drive', to: 'users#drive', as: :driver
   post 'users/payauth', to: 'users#pay_auth'

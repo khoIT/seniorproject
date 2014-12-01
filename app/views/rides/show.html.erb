@@ -1,0 +1,23 @@
+<%= render partial: "layouts/header" %>
+<div class="col-xs-8">
+
+<h4>Ride Details</h4>
+
+<table class="table content">
+
+	  <th>From</th>
+	  <th>Destination</th>
+	  <th>Time</th>
+	  <th>Seats</th>
+	 </thead>
+	<tr>
+		<td><%= @ride.start %></td>
+		<td><%= @ride.destination %></td>
+		<td><%= @ride.start_time.strftime("%b-%d %H:%M") %> - <%= @ride.end_time.strftime("%b-%d %H:%M") %></td>
+		<td><%= @ride.seats_left %></td>
+	</tr>
+</table>
+
+<%= link_to 'Back to All Rides', root_path %>
+</div>
+<%= render "chat" %>

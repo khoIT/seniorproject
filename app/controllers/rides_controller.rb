@@ -1,8 +1,12 @@
 class RidesController < ApplicationController
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
   def new
   end
+
+  def show
+  end 
 
   #create a new ride upon request
   def create
@@ -38,5 +42,14 @@ class RidesController < ApplicationController
   def list_start
     @start = Ride.all.order(:start).where("start like ?", "%#{params[:term]}%")
     render json: @start
+  end
+
+  private
+  def set_product
+    @ride = Ride.find(params[:id])
+  end
+
+  def product_params
+    params.require(:ride).permit(:start, :destination, :start_time, :end_time, :seats_left)
   end
 end

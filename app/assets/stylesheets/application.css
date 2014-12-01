@@ -139,6 +139,8 @@ h4{
 .container{
   width: 90% !important;
   display: block !important;
+  padding-left: 5px !important;
+  padding-right: 5px !important;
 }
 .toolbar{
   margin-top: 10px;
@@ -158,3 +160,4 @@ h4{
 .chat_container{
   background: #aaa !important;
 }
+

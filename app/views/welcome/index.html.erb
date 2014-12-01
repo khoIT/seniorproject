@@ -4,7 +4,7 @@
   <!--chat box -->
   <% if current_user then %>
     <div class="col-md-4">      
-        <%= render "chat" %>
+        <%= render "chatall" %>
     </div>
   <% end %>
 
@@ -19,7 +19,7 @@
           <th>Status</th>
           <th>From</th>
           <th>Destination</th>
-          <th>Departure</th>
+          <th>Time</th>
         <% if current_user then %>
           <th>Seats</th>
           <th>Driver</th>
@@ -37,7 +37,7 @@
             <h4><label style="display:inline-block" class="label label-success lable-lg">Active</label></h4>
           <% end %>
         </td>
-        <td class=""><%= r.start %></td>
+        <td class=""><%= link_to r.start, ride_path(r)%></td>
         <td class=""><%= r.destination %></td>
         <td class=""><%= r.start_time.strftime("%b-%d %H:%M") %> - <%= r.end_time.strftime("%b-%d %H:%M") %></td>
         <% if current_user then %>
