@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require angular
 //= require angular-route
 //= require bootstrap
@@ -21,7 +23,5 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require date
-//= require_tree .
-//= require dataTables/jquery.dataTables
+//= require_tree ./angularjs
 //= require bootstrap-switch
-//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap

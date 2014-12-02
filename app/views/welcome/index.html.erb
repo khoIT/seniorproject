@@ -1,5 +1,5 @@
 <%= render partial: "layouts/header" %>
-  <div class="row">
+  
 
   <!--chat box -->
   <% if current_user then %>
@@ -9,8 +9,7 @@
   <% end %>
 
   <!-- Table -->
-  <div class="col-md-8">
-  <div class="container content">
+  <div class="content col-md-8 container ">
     <% if current_user then %>
     <input type="checkbox" name="driver" checked>
     <% end %>
@@ -69,7 +68,6 @@
       <% end %>
       </tbody>
     </table>
-  </div>
   </div>
 <%= render partial: "layouts/footer" %>
 <script>

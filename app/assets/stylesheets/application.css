@@ -137,9 +137,8 @@ h4{
       width: 100% !important;
     }
 .container{
-  width: 90% !important;
   display: block !important;
-  padding-left: 5px !important;
+  padding-left: 0px !important;
   padding-right: 5px !important;
 }
 .toolbar{
