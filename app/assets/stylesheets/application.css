@@ -69,6 +69,7 @@
   background: #aaa;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-right:5px;
 
 }
 .nav-tabs > li > a{
@@ -138,7 +139,7 @@ h4{
     }
 .container{
   display: block !important;
-  padding-left: 0px !important;
+  padding-left: 5px !important;
   padding-right: 5px !important;
 }
 .toolbar{
