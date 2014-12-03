@@ -8,7 +8,7 @@
   <table>
     <tr>
       <td style="padding-right: 20px"><%= button_to "Venmo", user_omniauth_authorize_url(:venmo), {class: "btn btn-depauw"} %></td>
-      <td><%= button_to "Paypal", user_omniauth_authorize_url(:venmo), {class: "btn btn-primary"} %></td>
+      <td><%= button_to "Paypal", user_omniauth_authorize_url(:venmo, email: current_user.email, amount:params[:cost]), {class: "btn btn-primary"} %></td>
     </tr>
   </table>
 <%= render partial: "layouts/footer" %>

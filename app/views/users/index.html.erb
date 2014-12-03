@@ -78,7 +78,7 @@
   <!-- normal ride -->
   <% current_user.rides.each do |r| %>
   <% if !current_user.pending?(r) %>
-  <div class="col-md-4">
+  <div class="col-md-5">
       <div class="panel panel-depauw">
         <div class="panel-heading"><b><%= r.start %></b> to <b><%= r.destination %></b></div>
         <div class="panel-body">

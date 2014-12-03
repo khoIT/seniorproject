@@ -14,7 +14,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def venmo
     session["devise.venmo"] = request.env["omniauth.auth"]
-
     #data = {access_token: session["devise.venmo"].credentials.token,
     #         email: "khoitran_2014@depauw.edu",
     #         note: "testing",
@@ -26,12 +25,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     #sandbox
     url = "https://sandbox-api.venmo.com/v1/payments"
     data = {access_token: session["devise.venmo"].credentials.token,
-              email: "venmo@venmo.com",
+              email: request.env["omniauth.params"]["email"],
               note: "testing",
-              amount: "0.10",
+              amount: request.env["omniauth.params"]["amount"],
               dataType: 'jsonp'
     }
 
+    byebug
     res = Net::HTTP.post_form(URI.parse(url), data)
     session["response"] = JSON.parse(res.body)
     redirect_to pay_path

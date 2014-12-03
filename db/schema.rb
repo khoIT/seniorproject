@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 20141107062528) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "comment"
-    t.integer  "cost"
     t.datetime "end_time"
+    t.decimal  "cost"
   end
 
   create_table "sessions", force: true do |t|
