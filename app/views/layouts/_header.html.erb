@@ -13,11 +13,13 @@
   <body class="black-depauw">
     <div class="container">
       <ul class="nav nav-tabs" role="tablist">
-        <li> <a href="/"> <span class="glyphicon glyphicon-home"></span></a> </li>
-        <li> <a href="/rides/new"> <span class="glyphicon glyphicon-plus"></span></a> </li>
+        <li> <a href="/"> <span class="glyphicon glyphicon-home"></span>  Home</a> </li>
+        <li> <a href="/rides/new"> <span class="glyphicon glyphicon-plus"></span>  Request a Ride </a> </li>
         <% if current_user %>
         <li>
-          <%= link_to "My Drive", user_path(id: current_user.id) %>
+          <%= link_to user_path(id: current_user.id) do %>
+            <span class="glyphicon glyphicon-th"></span> My Drive
+          <% end %>
         </li>
         <% end %>
         <li>

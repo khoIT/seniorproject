@@ -1,8 +1,8 @@
 Rideshare::Application.configure do
   ENV['FACEBOOK_APP_ID'] = "559857074118686";
   ENV['FACEBOOK_SECRET'] = "a892c1eac456baa8af35bc9b79f0476c";
-  #ENV['GOOGLE_APP_ID'] = "1045296631393-moesv08ba9sanumlq0iboason6pnm4f3.apps.googleusercontent.com";
-  #ENV['GOOGLE_SECRET'] = "t4HVJUzwSEQuoGg81ux4Vzns";
+  ENV['GOOGLE_APP_ID'] = "1045296631393-moesv08ba9sanumlq0iboason6pnm4f3.apps.googleusercontent.com";
+  ENV['GOOGLE_SECRET'] = "t4HVJUzwSEQuoGg81ux4Vzns";
   ENV['VENMO_CLIENT_ID'] = "1946";
   ENV['VENMO_CLIENT_SECRET'] = "4BDh2qzFL6TjBRXYcM7YuT7FEnne734L";
   # Settings specified here will take precedence over those in config/application.rb.
@@ -70,7 +70,7 @@ Rideshare::Application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'depauwrides.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'depauwrides-showcase.herokuapp.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

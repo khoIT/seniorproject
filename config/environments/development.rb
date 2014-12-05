@@ -2,8 +2,8 @@ Rideshare::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   ENV['FACEBOOK_APP_ID'] = "559857074118686";
   ENV['FACEBOOK_SECRET'] = "a892c1eac456baa8af35bc9b79f0476c";
-  ENV['GOOGLE_APP_ID'] = "934705303341-m29bpe28qipvre063g9m8t76r4qs8mfs.apps.googleusercontent.com";
-  ENV['GOOGLE_SECRET'] = "MIltu11G3zqa4kcKycV5OZFq";
+  ENV['GOOGLE_APP_ID'] = "1045296631393-moesv08ba9sanumlq0iboason6pnm4f3.apps.googleusercontent.com";
+  ENV['GOOGLE_SECRET'] = "t4HVJUzwSEQuoGg81ux4Vzns";
   ENV['VENMO_CLIENT_ID'] = "1946";
   ENV['VENMO_CLIENT_SECRET'] = "4BDh2qzFL6TjBRXYcM7YuT7FEnne734L";
   # In the development environment your application's code is reloaded on
@@ -34,14 +34,13 @@ Rideshare::Application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
-
   config.action_mailer.smtp_settings = {
-  address: "smtp.gmail.com",
-  port: 587,
-  domain: ENV["GMAIL_DOMAIN"],
-  authentication: "plain",
-  enable_starttls_auto: true,
-  user_name: 'khoitran_2014@depauw.edu',
-  password: 'd3t3rmination'
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: ENV["GMAIL_DOMAIN"],
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_PASSWORD"]
   }
 end
