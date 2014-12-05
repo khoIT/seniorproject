@@ -71,7 +71,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 3.1.2'
 gem 'omniauth-facebook'
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 gem "font-awesome-rails"
-gem "omniauth-google-oauth2"
+gem "omniauth-google-oauth2", '0.2.5'
 group :development, :test do
   gem 'foreman'
 end
