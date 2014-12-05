@@ -3,7 +3,7 @@ Rideshare::Application.routes.draw do
   resources :messages
   resources :rides
   
-  devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"},
+  devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks", registrations: "registrations"},
                     path_names: {sign_in: "login", sign_out: "logout"}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
