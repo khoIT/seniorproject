@@ -258,6 +258,6 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   #OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET']
-  config.omniauth :google_oauth2, ENV['GOOGLE_APP_ID'], ENV['GOOGLE_SECRET'], { }
+  config.omniauth :google_oauth2, '1045296631393-moesv08ba9sanumlq0iboason6pnm4f3.apps.googleusercontent.com', 't4HVJUzwSEQuoGg81ux4Vzns', { }
   config.omniauth :venmo, ENV['VENMO_CLIENT_ID'], ENV['VENMO_CLIENT_SECRET'], scope: 'access_profile,make_payments'
 end
