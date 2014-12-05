@@ -31,7 +31,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
               dataType: 'jsonp'
     }
 
-    byebug
     res = Net::HTTP.post_form(URI.parse(url), data)
     session["response"] = JSON.parse(res.body)
     redirect_to pay_path
